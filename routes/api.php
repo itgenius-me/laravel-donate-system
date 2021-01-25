@@ -32,11 +32,6 @@ Route::group(['middleware' => ['throttle:60,1']], function () {
         Route::resource('products', ProductController::class);
     });
 
-    // Cybersource
-    Route::group(['prefix' => 'cybsersources'], function () {
-        Route::post('checkout', [CybersourceController::class, 'postCheckout']);
-    });
-
     // Fallback when URL is not existed.
     Route::fallback(function(){
         return response()->json([
