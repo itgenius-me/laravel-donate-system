@@ -4,8 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\API\Auth\AuthController;
-use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\CybersourceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,8 +26,6 @@ Route::group(['middleware' => ['throttle:60,1']], function () {
         // Authentication
         Route::get('user', [AuthController::class, 'getUser']);
         Route::get('logout', [AuthController::class, 'getLogout']);
-
-        Route::resource('products', ProductController::class);
     });
 
     // Fallback when URL is not existed.
