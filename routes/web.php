@@ -22,4 +22,9 @@ Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified'])->group( function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('test', function () {
+        $ip = request()->ip();
+        dd($ip);
+    });
 });
