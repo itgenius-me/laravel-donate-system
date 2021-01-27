@@ -5,9 +5,6 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 use App\Models\User;
-use App\Models\GigItem;
-use App\Models\Notification;
-use App\Models\Profile;
 use DB;
 
 class UserSeeder extends Seeder
