@@ -14,8 +14,8 @@ class AlterUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            if (!Schema::hasColumn('users', 'celphone')) {
-                $table->string('celphone')->nullable()->after('email');
+            if (!Schema::hasColumn('users', 'cellphone')) {
+                $table->string('cellphone')->nullable()->after('email');
             }
         });
     }
@@ -28,7 +28,7 @@ class AlterUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['celphone']);
+            $table->dropColumn(['cellphone']);
         });
     }
 }
