@@ -217,7 +217,7 @@
                 @enderror
             </div>
             <div class="row">
-                <div class="inputBox col-md-4">
+                <div class="inputBox col-md-6">
                     <select name="cellphone_code" data-selected="">
                         <option data-countryCode="GB" value="44" Selected>UK (+44)</option>
                         <option data-countryCode="US" value="1">USA (+1)</option>
@@ -437,7 +437,7 @@
                             <option data-countryCode="ZW" value="263">Zimbabwe (+263)</option>
                     </select>
                 </div>
-                <div class="inputBox col-md-8">
+                <div class="inputBox col-md-6">
                     <input type="text" name="cellphone" autocomplete="off" required onkeyup="this.setAttribute('value', this.value);" value="{{ old('cellphone') }}">
                     <label style="left: 15px;">{{ __('global.CellPhone') }}</label>
                     @error('cellphone')
