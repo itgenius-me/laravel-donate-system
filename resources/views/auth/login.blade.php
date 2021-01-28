@@ -192,8 +192,13 @@
             <input type="submit" class="mt-3" name="sign-in" value="{{ __('global.Login') }}">
         </form>
     </div>
-    <div class="col-md-12 text-right">
-        <a href="{{ route('register') }}" class="text-white-50">{{ __('global.not_have') }}</a>
+    <div class="row mr-0 ml-0">
+        <div class="col-md-5 text-left">
+            <a href="{{ url('password/reset') }}" class="text-white-50">{{ __('global.forgot_password') }}</a>
+        </div>
+        <div class="col-md-7 text-right">
+            <a href="{{ route('register') }}" class="text-white-50">{{ __('global.not_have') }}</a>
+        </div>
     </div>
 </div>
 </body>
