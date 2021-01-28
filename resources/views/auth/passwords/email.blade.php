@@ -13,8 +13,10 @@
         body {
             margin: 0;
             padding: 0;
-            background: url(https://picsum.photos/2500/1500?image=1041);
-            background-size: cover;
+            background: url("{{ asset('assets/login_background.jpg') }}");
+            /*background-size: cover;*/
+            background-repeat: no-repeat;
+            background-size: 100% auto;
             font-family: sans-serif;
         }
 
