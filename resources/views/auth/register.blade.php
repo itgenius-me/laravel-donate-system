@@ -1,91 +1,242 @@
-@extends('layouts.app')
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url(https://picsum.photos/2500/1500?image=1041);
+            background-size: cover;
+            font-family: sans-serif;
+        }
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+        .box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30rem;
+            padding: 2.5rem;
+            box-sizing: border-box;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 0.625rem;
+        }
+        .box h2 {
+            margin: 0 0 1.875rem;
+            padding: 0;
+            color: #fff;
+            text-align: center;
+        }
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+        .box .inputBox {
+            position: relative;
+            margin-top: 0.5rem;
+        }
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .box .inputBox input {
+            width: 100%;
+            padding: 0.625rem 0;
+            font-size: 1rem;
+            color: #fff;
+            letter-spacing: 0.062rem;
+            margin-bottom: 0.5rem;
+            border: none;
+            border-bottom: 0.065rem solid #fff;
+            outline: none;
+            background: transparent;
+        }
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+        input:-webkit-autofill,
+        input:-webkit-autofill:hover,
+        input:-webkit-autofill:focus,
+        textarea:-webkit-autofill,
+        textarea:-webkit-autofill:hover,
+        textarea:-webkit-autofill:focus,
+        select:-webkit-autofill,
+        select:-webkit-autofill:hover,
+        select:-webkit-autofill:focus {
+            border: none;
+            border-bottom: 0.065rem solid #fff;
+            outline: none;
+            background: transparent;
+            -webkit-text-fill-color: white;
+            transition: background-color 5000s ease-in-out 0s;
+        }
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+        .box .inputBox label {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0.625rem 0;
+            font-size: 1rem;
+            color: #fff;
+            pointer-events: none;
+            transition: 0.5s;
+        }
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .box .inputBox input:focus ~ label,
+        .box .inputBox input:valid ~ label,
+        .box .inputBox input:not([value=""]) ~ label {
+            top: -1.125rem;
+            left: 0;
+            color: #03a9f4;
+            font-size: 0.75rem;
+        }
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Cellphone') }}</label>
+        .box input[type="submit"] {
+            border: none;
+            outline: none;
+            color: #fff;
+            background-color: #03a9f4;
+            padding: 0.625rem 1.25rem;
+            cursor: pointer;
+            border-radius: 0.312rem;
+            font-size: 1rem;
+            width: 100%;
+        }
 
-                            <div class="col-md-6">
-                                <input id="cellphone" type="email" class="form-control @error('cellphone') is-invalid @enderror" name="cellphone" value="{{ old('cellphone') }}" required autocomplete="cellphone">
+        .box input[type="submit"]:hover {
+            background-color: #1cb1f5;
+        }
+        .checkbox {
+            display: inline-flex;
+            cursor: pointer;
+            position: relative;
+            margin-bottom: 20px;
+        }
 
-                                @error('cellphone')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .checkbox > span {
+            color: white;
+            font-size: 14px;
+            padding: 0.5rem;
+        }
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+        .checkbox > input {
+            height: 25px;
+            width: 25px;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            -o-appearance: none;
+            appearance: none;
+            border: 1px solid #34495E;
+            border-radius: 4px;
+            outline: none;
+            transition-duration: 0.3s;
+            border: 2px solid #41B883;
+            cursor: pointer;
+            margin-top: 6px !important;
+        }
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+        .checkbox > input:checked {
+            border: 2px solid #41B883;
+            background-color: #34495E;
+        }
 
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+        .checkbox > input:checked + span::before {
+            content: '\2713';
+            display: block;
+            text-align: center;
+            color: #41B883;
+            position: absolute;
+            left: 0.5rem;
+            top: 0.5rem;
+            font-weight: bold;
+        }
 
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+        .checkbox > input:active {
+            border: 2px solid #34495E;
+        }
+        @media only screen and (max-width: 600px) {
+            .box {
+                width: 20rem;
+            }
+            .checkbox > input {
+                width: 35px;
+            }
+        }
+        .invalid-feedback {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div class="col-md-12">
+        <h2 class="mb-4">{{ __('global.Register') }}</h2>
+        <form method="POST" action="{{ route('register') }}">
+            @csrf
+            <div class="inputBox">
+                <input id="name" type="text" name="name" value="{{ old('name') }}" required autocomplete="off" autofocus>
+                <label>{{ __('global.Name') }}</label>
+                @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
             </div>
-        </div>
+            <div class="inputBox">
+                <input type="email" name="email" autocomplete="off" required onkeyup="this.setAttribute('value', this.value);" value="{{ old('email') }}">
+                <label>{{ __('global.Email') }}</label>
+                @error('email')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="inputBox">
+                <input type="text" name="cellphone" autocomplete="off" required onkeyup="this.setAttribute('value', this.value);" value="{{ old('cellphone') }}">
+                <label>{{ __('global.CellPhone') }}</label>
+                @error('cellphone')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="inputBox">
+                <input type="password" name="password" autocomplete="off" required onkeyup="this.setAttribute('value', this.value);" value=""
+                    {{--                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"--}}
+                    {{--                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"--}}
+                >
+                <label>{{ __('global.Password') }}</label>
+                @error('password')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="inputBox">
+                <input type="password" name="password_confirmation" autocomplete="off" required onkeyup="this.setAttribute('value', this.value);" value=""
+                    {{--                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"--}}
+                    {{--                   title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"--}}
+                >
+                <label>{{ __('global.ConfirmPassword') }}</label>
+                @error('password_confirmation')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <label class="checkbox">
+                <input type="checkbox" required />
+                <span>
+                    {{ __('global.Agreement') }}
+                </span>
+            </label>
+            <input type="submit" name="sign-up" value="{{ __('global.CreateAccount') }}">
+        </form>
+    </div>
+    <div class="col-md-12 text-right">
+        <a href="{{ route('login') }}" class="text-white-50">{{ __('global.already_have') }}</a>
     </div>
 </div>
-@endsection
+</body>
+
+</html>
