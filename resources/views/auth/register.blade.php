@@ -190,7 +190,7 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <div class="inputBox">
-                <input type="email" id="reference" name="reference" autocomplete="off" required onkeyup="this.setAttribute('value', this.value);" value="{{ old('reference') }}">
+                <input type="email" id="reference" name="reference" autocomplete="off" onkeyup="this.setAttribute('value', this.value);" value="{{ old('reference') }}">
                 <label>{{ __('global.Reference') }}</label>
                 @error('reference')
                 <span class="invalid-feedback" role="alert">
@@ -489,7 +489,7 @@
         console.log(obj.value)
         obj.setAttribute('value', obj.value);
         // if (document.getElementById('reference').value == "")
-            document.getElementById('reference').setAttribute('value', obj.value);
+        //     document.getElementById('reference').setAttribute('value', obj.value);
     }
 </script>
 </body>
