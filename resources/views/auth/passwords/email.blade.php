@@ -18,6 +18,7 @@
             background-repeat: no-repeat;
             background-size: 100% auto;
             font-family: sans-serif;
+            background-color: black;
         }
 
         .box {
