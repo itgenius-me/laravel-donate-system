@@ -28,7 +28,7 @@
             width: 30rem;
             padding: 2.5rem;
             box-sizing: border-box;
-            background: rgba(0, 0, 0, 0.6);
+            /*background: rgba(0, 0, 0, 0.6);*/
             border-radius: 0.625rem;
         }
         .box h2 {
