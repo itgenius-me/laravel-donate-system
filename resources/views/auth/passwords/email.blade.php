@@ -13,10 +13,14 @@
         body {
             margin: 0;
             padding: 0;
-            background: url("{{ asset('assets/login_background.jpg') }}");
+            background: url("{{ asset('assets/login_background.jpg') }}") no-repeat center center fixed;
             /*background-size: cover;*/
-            background-repeat: no-repeat;
-            background-size: 100% auto;
+            /*background-repeat: no-repeat;*/
+            /*background-size: 100% auto;*/
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
             font-family: sans-serif;
             background-color: black;
         }
