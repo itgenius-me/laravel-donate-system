@@ -1,3 +1,3 @@
 <footer class="footer">
-    © 2018 Eliteadmin by themedesigner.in
+    © 2021 XGLOBAL by Meng Lang
 </footer>

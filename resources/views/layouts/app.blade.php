@@ -9,7 +9,7 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/logo.png') }}">
 
     {{-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries --}}
     <!--[if lt IE 9]>
