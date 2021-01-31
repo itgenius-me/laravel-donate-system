@@ -14,6 +14,7 @@ return [
     */
 
     'Login' => 'Login',
+    'Logout' => 'Log Out',
     'Register' => 'Register',
     'CreateAccount' => 'Create Account',
     'Reference' => 'Reference',
@@ -31,5 +32,41 @@ return [
     'LoginHere' => 'Login Here',
     'ResetPassword' => 'Reset Password',
     'send_password_reset' => 'Send Password Reset Link',
-
+    'MyAccount' => [
+        'title'=> 'My Account',
+    ],
+    'System'=> 'SYSTEM',
+    'Dashboard' => [
+        'title'=> 'Dashboard',
+    ],
+    'UserManage' => [
+        'title'=> 'User Manage',
+    ],
+    'Testimonial' => [
+        'title'=> 'Testimonial',
+    ],
+    'OrderManage' => [
+        'title'=> 'Order Manage',
+        'ViewOrders'=> [
+            'title'=> 'View Orders',
+        ],
+        'ViewOrdersDisputed'=> [
+            'title'=> 'View Orders Disputed',
+        ],
+        'GetHelp'=> [
+            'title'=> 'Get Help',
+        ],
+        'ProvideHelp'=> [
+            'title'=> 'Provide Help',
+        ],
+        'ViewGrowth'=> [
+            'title'=> 'View Growth',
+        ],
+    ],
+    'OrderGenerate' => [
+        'title'=> 'Order Generate',
+    ],
+    'Application' => [
+        'title'=> 'Application',
+    ],
 ];
