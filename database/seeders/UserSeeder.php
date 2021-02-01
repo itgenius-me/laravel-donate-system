@@ -16,12 +16,19 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->delete();
+        User::truncate();
 
         // create users
         $superAdmin = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
         ]);
+        $superAdmin->assignRole('Admin');
+
+        $user = User::factory()->create([
+            'name' => 'User',
+            'email' => 'user@user.com'
+        ]);
+        $user->assignRole('User');
     }
 }
