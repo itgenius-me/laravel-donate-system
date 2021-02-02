@@ -69,4 +69,22 @@ return [
     'Application' => [
         'title'=> 'Application',
     ],
+    'Participants'=> [
+        'title'=> 'Participants',
+        'Referral'=> [
+            'title'=> 'Referral'
+        ],
+    ],
+    'MyPage'=> [
+        'title'=> 'My Page',
+        'MyLettersofHappiness'=> [
+            'title'=> 'My Letters of Happiness'
+        ],
+    ],
+    'Mavro'=> [
+        'title'=> 'Mavro'
+    ],
+    'Account'=> [
+        'title'=> 'Account'
+    ],
 ];
