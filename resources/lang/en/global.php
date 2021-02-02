@@ -32,6 +32,10 @@ return [
     'LoginHere' => 'Login Here',
     'ResetPassword' => 'Reset Password',
     'send_password_reset' => 'Send Password Reset Link',
+    'Action' => 'Action',
+    'CreatedAt' => 'Created Date',
+    'Edit' => 'Edit',
+    'Delete' => 'Delete',
     'MyAccount' => [
         'title'=> 'My Account',
     ],
@@ -41,6 +45,11 @@ return [
     ],
     'UserManage' => [
         'title'=> 'User Manage',
+        'create' => 'Create User',
+        'Message' => [
+            'deleteSuccess' => 'The user is deleted successfully.',
+            'udpateSuccess' => 'The user is updated successfully.'
+        ]
     ],
     'Testimonial' => [
         'title'=> 'Testimonial',
@@ -69,4 +78,11 @@ return [
     'Application' => [
         'title'=> 'Application',
     ],
+    'Swal' => [
+        "DelConfirm" => [
+            "title" => "Are you sure?",
+            "text" => "You would not be able to revert this!",
+            "yes" => "Yes, delete it!"
+        ],
+    ]
 ];
