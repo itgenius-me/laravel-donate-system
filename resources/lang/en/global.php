@@ -84,7 +84,7 @@ return [
             "text" => "You would not be able to revert this!",
             "yes" => "Yes, delete it!"
         ],
-    ]
+    ],
     'Participants'=> [
         'title'=> 'Participants',
         'Referral'=> [
