@@ -70,6 +70,7 @@ class UserController extends Controller
 
         $validated['password'] = Hash::make($validated['password']);
         $user = User::create($validated);
+        $user->assignRole('User');
 
         return redirect('/admin/users');
     }
