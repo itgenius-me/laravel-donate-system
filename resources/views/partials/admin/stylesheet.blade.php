@@ -8,3 +8,5 @@
         padding-left: 0px;
     }
 </style>
+
+@stack('css')

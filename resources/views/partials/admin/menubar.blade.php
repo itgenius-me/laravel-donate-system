@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('/user-manage') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('/admin/users') }}" aria-expanded="false">
                         <i class="icon-people"></i>
                         <span class="hide-menu">{{ __('global.UserManage.title') }}</span>
                     </a>
