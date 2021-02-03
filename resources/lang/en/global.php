@@ -37,6 +37,7 @@ return [
     'CreatedAt' => 'Created Date',
     'Edit' => 'Edit',
     'Delete' => 'Delete',
+    'Role' => 'Role',
     'MyAccount' => [
         'title'=> 'My Account',
     ],
