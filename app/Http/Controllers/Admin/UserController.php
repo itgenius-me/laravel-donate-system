@@ -32,6 +32,9 @@ class UserController extends Controller
                     </form>';
                     return $btn;
                 })
+                ->editColumn('cellphone', function ($row) {
+                    return '+ '. $row->cellphone_code .' '. $row->cellphone;
+                })
                 ->editColumn('created_at', function ($row) {
                     return Carbon::parse($row->created_at)->toDateTimeString();
                 })

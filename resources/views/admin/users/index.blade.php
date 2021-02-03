@@ -64,9 +64,9 @@
         },
         'columns': [
             {'data': 'id'},
+            {'data': 'reference'},
             {'data': 'name'},
             {'data': 'email'},
-            {'data': 'reference'},
             {'data': 'cellphone'},
             {'data': 'created_at'},
             {'data': 'action'}

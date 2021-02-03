@@ -17,17 +17,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::truncate();
-
         // create users
         $superAdmin = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
+            'cellphone_code' => 44,
+            'cellphone' => '20 8759 9036'
         ]);
         $superAdmin->assignRole('Admin');
 
         $user = User::factory()->create([
             'name' => 'User',
-            'email' => 'user@user.com'
+            'email' => 'user@user.com',
+            'cellphone_code' => 44,
+            'cellphone' => '20 8759 5496'
         ]);
         $user->assignRole('User');
     }
