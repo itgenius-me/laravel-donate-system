@@ -13,3 +13,5 @@
 <script src="{{ asset('assets/node_modules/sparkline/jquery.sparkline.min.js') }}"></script>
 <!--Custom JavaScript -->
 <script src="{{ asset('dist/js/custom.min.js') }}"></script>
+
+@stack('js')
