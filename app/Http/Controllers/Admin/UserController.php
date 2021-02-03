@@ -12,14 +12,22 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     /**
+     * 
+     */
+    public function __contruct(Request $request)
+    {
+        
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::all();
-        if (request()->ajax()) {
+        if ($request->ajax()) {
             return Datatables::of($users)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -30,7 +38,15 @@ class UserController extends Controller
                     <input type="hidden" name="_method" value="DELETE">
                     @method("DELETE")
                     </form>';
+
                     return $btn;
+                })
+                ->addColumn('country', function ($row) {
+                    $jsonCountries = file_get_contents(base_path('public/assets/countries.json'));
+                    $arrayCountries = json_decode($jsonCountries, true);
+                    $arrayKey = array_search($row->cellphone_code, array_column($arrayCountries, 'ISD'));
+                    
+                    return $arrayCountries[$arrayKey]['NAME'];
                 })
                 ->editColumn('cellphone', function ($row) {
                     return '+ '. $row->cellphone_code .' '. $row->cellphone;

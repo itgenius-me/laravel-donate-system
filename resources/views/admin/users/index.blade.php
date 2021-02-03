@@ -22,6 +22,7 @@
                                     <th>{{ trans('global.Name') }}</th>
                                     <th>{{ trans('global.Email') }}</th>
                                     <th>{{ trans('global.CellPhone') }}</th>
+                                    <th>{{ trans('global.Country') }}</th>
                                     <th>{{ trans('global.CreatedAt') }}</th>
                                     <th>{{ trans('global.Action') }}</th>
                                 </tr>
@@ -33,6 +34,7 @@
                                     <th>{{ trans('global.Name') }}</th>
                                     <th>{{ trans('global.Email') }}</th>
                                     <th>{{ trans('global.CellPhone') }}</th>
+                                    <th>{{ trans('global.Country') }}</th>
                                     <th>{{ trans('global.CreatedAt') }}</th>
                                     <th>{{ trans('global.Action') }}</th>
                                 </tr>
@@ -68,6 +70,7 @@
             {'data': 'name'},
             {'data': 'email'},
             {'data': 'cellphone'},
+            {'data': 'country'},
             {'data': 'created_at'},
             {'data': 'action'}
         ],
