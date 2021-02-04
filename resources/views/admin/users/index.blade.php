@@ -53,13 +53,40 @@
 @push('css')
 <link href="{{ asset('assets/node_modules/datatables/media/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/node_modules/sweetalert/sweetalert.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+<style>
+    .jq-icon-info {
+        background-color: #03a9f3;
+        color: #fff;
+    }
+    
+    .jq-icon-success {
+        background-color: #00c292;
+        color: #fff;
+    }
+
+    .jq-icon-error {
+        background-color: #e46a76;
+        color: #fff;
+    }
+
+    .jq-icon-warning {
+        background-color: #fec107;
+        color: #fff;
+    }
+
+    .alert-rounded {
+        border-radius: 60px; 
+    }
+</style>
 @endpush
 
 @push('js')
 <script src="{{ asset('assets/node_modules/datatables/datatables.min.js') }}"></script>
 <script src="{{ asset('assets/node_modules/sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
 <script>
-    $('#dataTable').DataTable({
+    var dataTable = $('#dataTable').DataTable({
         'processing': true,
         'serverSide': true,
         'ajax': {
@@ -94,6 +121,56 @@
         }).then(function (result) {
             if (result.value) {
                 $('#deleteForm'+userId).submit();
+            }
+        })
+    }
+
+    function blockOrUnBlockUser(userId) {
+        Swal.fire({
+            title: "{{ trans('global.Swal.BlockConfirm.title') }}",
+            text: "{{ trans('global.Swal.BlockConfirm.text') }}",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "{{ trans('global.Swal.BlockConfirm.yes') }}",
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn btn-danger ml-1',
+            buttonsStyling: false,
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ url('admin/users/update-status') }}",
+                    data: {
+                        'id': userId,
+                        '_token': "{{ csrf_token() }}"
+                    },
+                    success: function (data) {
+                        if (data.success) {
+                            $.toast({
+                                heading: "{{ trans('global.Success') }}",
+                                text: data.message,
+                                position: 'top-right',
+                                loaderBg:'#ff6849',
+                                icon: 'success',
+                                hideAfter: 3000, 
+                                stack: 6
+                            });
+                        } else {
+                            $.toast({
+                                heading: "{{ trans('global.Error') }}",
+                                text: data.message,
+                                position: 'top-right',
+                                loaderBg:'#ff6849',
+                                icon: 'error',
+                                hideAfter: 3000, 
+                                stack: 6
+                            });
+                        }
+                        dataTable.ajax.reload(null, false);
+                    }
+                });
             }
         })
     }

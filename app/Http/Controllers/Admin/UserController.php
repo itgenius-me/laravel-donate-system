@@ -9,6 +9,7 @@ use DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use Exception;
 
 class UserController extends Controller
 {
@@ -32,8 +33,18 @@ class UserController extends Controller
             return Datatables::of($users)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
-                    $btn = '<a href="'. route('admin.users.edit', $row->guid) .'" data-id="'.$row->guid.'" class="edit btn btn-primary btn-sm mb-1">'. trans('global.Edit') .'</a>';
-                    $btn .= ' <a href="javascript:deleteUser('. "'$row->guid'" .')" data-id="'.$row->guid.'" class="btn btn-danger btn-sm mb-1">'. trans('global.Delete') .'</a>';
+                    if (request()->user()->id === $row->id)
+                        $disabled = 'disabled';
+                    else
+                        $disabled = '';
+
+                    if ($row->activated)
+                        $btn = '<button onclick="blockOrUnBlockUser('. "'$row->guid'" .');" data-id="'.$row->guid.'" class="edit btn btn-success btn-sm mb-1 mr-1" '. $disabled .'><i class="fas fa-cog"></i> '. trans('global.UserManage.activated') .'</button>';
+                    else
+                        $btn = '<button onclick="blockOrUnBlockUser('. "'$row->guid'" .');" data-id="'.$row->guid.'" class="edit btn btn-warning btn-sm mb-1 mr-1" '. $disabled .'><i class="fas fa-cog"></i> '. trans('global.UserManage.inactivated') .'</button>';
+                        
+                    $btn .= '<a href="'. route('admin.users.edit', $row->guid) .'" data-id="'.$row->guid.'" class="edit btn btn-primary btn-sm mb-1"><i class="far fa-edit"></i></a>';
+                    $btn .= ' <button onclick="deleteUser('. "'$row->guid'" .')" data-id="'.$row->guid.'" class="btn btn-danger btn-sm mb-1" '. $disabled .'><i class="far fa-trash-alt"></i></button>';
                     $btn .= '<form id="deleteForm'. $row->guid .'" action="'. route('admin.users.destroy', $row->guid) .'" method="POST" style="display: none">
                     <input type="hidden" name="_token" value="'. csrf_token() .'">
                     <input type="hidden" name="_method" value="DELETE">
@@ -53,7 +64,7 @@ class UserController extends Controller
                     if ($row->roles[0]->name === 'Admin')
                         return '<span class="label label-success">'. $row->roles[0]->name .'</span>';
                     else
-                        return '<span class="label label-warning">'. $row->roles[0]->name .'</span>';
+                        return '<span class="label label-info">'. $row->roles[0]->name .'</span>';
                 })
                 ->editColumn('cellphone', function ($row) {
                     return '+ '. $row->cellphone_code .' '. $row->cellphone;
@@ -172,5 +183,28 @@ class UserController extends Controller
 
         return redirect('/admin/users')
             ->with('success', trans('global.UserManage.Message.deleteSuccess'));
+    }
+
+    /**
+     * 
+     */
+    public function postUpdateStatus(Request $request)
+    {
+        try {
+            $user = User::query()->whereGuid($request->id)->firstOrFail();
+            $user->update([
+                'activated' => !$user->activated
+            ]);
+        } catch (Exception $exception) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ]);
+        }
+        
+        return response()->json([
+            'success' => true,
+            'message' => trans('global.UserManage.Message.activateSuccess')
+        ]);
     }
 }
