@@ -23,6 +23,7 @@
                                     <th>{{ trans('global.Email') }}</th>
                                     <th>{{ trans('global.CellPhone') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
+                                    <th>{{ trans('global.Role') }}</th>
                                     <th>{{ trans('global.CreatedAt') }}</th>
                                     <th>{{ trans('global.Action') }}</th>
                                 </tr>
@@ -35,6 +36,7 @@
                                     <th>{{ trans('global.Email') }}</th>
                                     <th>{{ trans('global.CellPhone') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
+                                    <th>{{ trans('global.Role') }}</th>
                                     <th>{{ trans('global.CreatedAt') }}</th>
                                     <th>{{ trans('global.Action') }}</th>
                                 </tr>
@@ -71,6 +73,7 @@
             {'data': 'email'},
             {'data': 'cellphone'},
             {'data': 'country'},
+            {'data': 'role'},
             {'data': 'created_at'},
             {'data': 'action'}
         ],

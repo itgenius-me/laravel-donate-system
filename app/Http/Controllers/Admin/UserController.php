@@ -8,6 +8,7 @@ use App\Models\User;
 use DataTables;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -48,12 +49,19 @@ class UserController extends Controller
                     
                     return $arrayCountries[$arrayKey]['NAME'];
                 })
+                ->addColumn('role', function ($row) {
+                    if ($row->roles[0]->name === 'Admin')
+                        return '<span class="label label-success">'. $row->roles[0]->name .'</span>';
+                    else
+                        return '<span class="label label-warning">'. $row->roles[0]->name .'</span>';
+                })
                 ->editColumn('cellphone', function ($row) {
                     return '+ '. $row->cellphone_code .' '. $row->cellphone;
                 })
                 ->editColumn('created_at', function ($row) {
                     return Carbon::parse($row->created_at)->toDateTimeString();
                 })
+                ->rawColumns(['action', 'role'])
                 ->make(true);
         }
 
@@ -67,7 +75,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        $roles = Role::query()->orderBy('id', 'desc')->get();
+
+        return view('admin.users.create', compact('roles'));
     }
 
     /**
@@ -84,12 +94,13 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users'],
             'cellphone' => ['required'],
             'cellphone_code' => ['required'],
-            'password' => ['required']
+            'password' => ['required'],
+            'role' => ['required']
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
         $user = User::create($validated);
-        $user->assignRole('User');
+        $user->assignRole($validated['role']);
 
         return redirect('/admin/users');
     }
@@ -113,9 +124,10 @@ class UserController extends Controller
      */
     public function edit($guid)
     {
+        $roles = Role::query()->orderBy('id', 'desc')->get();
         $user = User::query()->whereGuid($guid)->firstOrFail();
 
-        return view('admin.users.edit', compact('user'));
+        return view('admin.users.edit', compact('user', 'roles'));
     }
 
     /**
@@ -134,12 +146,14 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users,email,'.$user->id],
             'cellphone' => ['required'],
             'cellphone_code' => ['required'],
+            'role' => ['required']
         ]);
         
         if ($request->password) {
             $validated['password'] = Hash::make($request->password);
         }
         $user->update($validated);
+        $user->syncRoles($validated['role']);
 
         return redirect('/admin/users')
             ->with('success', trans('global.UserManage.Message.udpateSuccess'));

@@ -11,7 +11,7 @@
 						<div class="form-group m-t-40 row">
 							<label for="reference" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.Reference') }}</label>
 							<div class="col-md-10 col-sm-12">
-								<input name="reference" class="form-control @error('reference') is-invalid @enderror" value="{{ old('reference') }}">
+								<input name="reference" class="form-control @error('reference') is-invalid @enderror" value="{{ old('reference') }}" placeholder="{{ trans('global.Reference') }}">
 								@if($errors->has('reference'))
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $errors->first('reference') }}</strong>
@@ -23,7 +23,7 @@
 						<div class="form-group row">
 							<label for="name" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.Name') }} <span class="text-danger">*</span></label>
 							<div class="col-md-10 col-sm-12">
-								<input name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required>
+								<input name="name" class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}" required placeholder="{{ trans('global.Name') }}">
 								@if($errors->has('name'))
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $errors->first('name') }}</strong>
@@ -35,7 +35,7 @@
 						<div class="form-group row">
 							<label for="email" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.Email') }} <span class="text-danger">*</span></label>
 							<div class="col-md-10 col-sm-12">
-								<input name="email" class="form-control @error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" required>
+								<input name="email" class="form-control @error('email') is-invalid @enderror" type="email" value="{{ old('email') }}" required placeholder="{{ trans('global.Email') }}">
 								@if($errors->has('email'))
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $errors->first('email') }}</strong>
@@ -263,7 +263,7 @@
 										<option data-countryCode="ZM" value="260" {{ old('cellphone_code') == 260 ? 'selected' : '' }}>Zambia (+260)</option>
 										<option data-countryCode="ZW" value="263" {{ old('cellphone_code') == 263 ? 'selected' : '' }}>Zimbabwe (+263)</option>
 									</select>
-									<input name="cellphone" class="form-control @error('cellphone') is-invalid @enderror offset-1 col-md-6 col-sm-12" value="{{ old('cellphone') }}" required>
+									<input name="cellphone" class="form-control @error('cellphone') is-invalid @enderror offset-1 col-md-6 col-sm-12" value="{{ old('cellphone') }}" required placeholder="{{ trans('global.CellPhone') }}">
 								</div>
 								@if($errors->has('cellphone'))
 								<span class="invalid-feedback" role="alert">
@@ -274,9 +274,25 @@
 						</div>
 
 						<div class="form-group row">
+							<label for="role" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.Role') }} <span class="text-danger">*</span></label>
+							<div class="col-md-10 col-sm-12">
+								<select name="role" class="form-control custom-select">
+									@foreach ($roles as $role)
+									<option value="{{ $role->name }}" {{ old('role') == $role->name ? 'selected' : '' }}>{{ $role->name }}</option>
+									@endforeach
+								</select>
+							</div>
+							@if($errors->has('role'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('role') }}</strong>
+							</span>
+							@endif
+						</div>
+
+						<div class="form-group row">
 							<label for="password" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.Password') }} <span class="text-danger">*</span></label>
 							<div class="col-md-10 col-sm-12">
-								<input name="password" class="form-control @error('password') is-invalid @enderror" type="password" required>
+								<input name="password" class="form-control @error('password') is-invalid @enderror" type="password" required placeholder="{{ trans('global.Password') }}">
 								@if($errors->has('password'))
 								<span class="invalid-feedback" role="alert">
 									<strong>{{ $errors->first('password') }}</strong>
