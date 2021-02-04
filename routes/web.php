@@ -23,6 +23,7 @@ Route::middleware(['auth', 'verified'])->group( function () {
 
     Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
         Route::resource('/users', UserController::class);
+        Route::post('/users/update-status', [UserController::class, 'postUpdateStatus']);
     });
 
     Route::get('test', function () {

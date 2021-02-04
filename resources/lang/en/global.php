@@ -38,6 +38,9 @@ return [
     'Edit' => 'Edit',
     'Delete' => 'Delete',
     'Role' => 'Role',
+    'Success' => 'Success',
+    'Error' => 'Error',
+    'Submit' => 'Submit',
     'MyAccount' => [
         'title'=> 'My Account',
     ],
@@ -45,12 +48,19 @@ return [
     'Dashboard' => [
         'title'=> 'Dashboard',
     ],
+    'Home' => [
+        'title' => 'Home'
+    ],
     'UserManage' => [
         'title'=> 'User Manage',
         'create' => 'Create User',
+        'edit' => 'Edit User',
+        'activated' => 'Activated',
+        'inactivated' => 'Inactivated',
         'Message' => [
             'deleteSuccess' => 'The user is deleted successfully.',
-            'udpateSuccess' => 'The user is updated successfully.'
+            'udpateSuccess' => 'The user is updated successfully.',
+            'activateSuccess' => 'The status is updated successfully.',
         ]
     ],
     'Testimonial' => [
@@ -81,11 +91,16 @@ return [
         'title'=> 'Application',
     ],
     'Swal' => [
-        "DelConfirm" => [
-            "title" => "Are you sure?",
-            "text" => "You would not be able to revert this!",
-            "yes" => "Yes, delete it!"
+        'DelConfirm' => [
+            'title' => 'Are you sure?',
+            'text' => 'You would not be able to revert this!',
+            'yes' => 'Yes, delete it!'
         ],
+        'BlockConfirm' => [
+            'title' => 'Are you sure?',
+            'text' => 'This user will be activated or inactivated!',
+            'yes' => 'Yes, activate or inactivate'
+        ]
     ],
     'Participants'=> [
         'title'=> 'Participants',
