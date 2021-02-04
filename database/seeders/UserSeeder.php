@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
         $superAdmin = User::factory()->create([
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
+            'reference' => 'admin@admin.com',
             'cellphone_code' => 44,
             'cellphone' => '20 8759 9036'
         ]);
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
         $user = User::factory()->create([
             'name' => 'User',
             'email' => 'user@user.com',
+            'reference' => 'user@user.com',
             'cellphone_code' => 44,
             'cellphone' => '20 8759 5496'
         ]);
