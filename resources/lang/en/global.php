@@ -40,6 +40,7 @@ return [
     'Role' => 'Role',
     'Success' => 'Success',
     'Error' => 'Error',
+    'Submit' => 'Submit',
     'MyAccount' => [
         'title'=> 'My Account',
     ],
@@ -47,9 +48,13 @@ return [
     'Dashboard' => [
         'title'=> 'Dashboard',
     ],
+    'Home' => [
+        'title' => 'Home'
+    ],
     'UserManage' => [
         'title'=> 'User Manage',
         'create' => 'Create User',
+        'edit' => 'Edit User',
         'activated' => 'Activated',
         'inactivated' => 'Inactivated',
         'Message' => [
