@@ -2,13 +2,13 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">{{ trans('global.UserManage.title') }}</h4>
+        <h4 class="text-themecolor">{{ trans('global.UserManage.ReferalTeams') }}</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{{ url('/') }}">{{ trans('global.UserManage.title') }}</a></li>
-                <li class="breadcrumb-item active">{{ trans('global.UserManage.Users') }}</li>
+                <li class="breadcrumb-item active">{{ trans('global.UserManage.ReferalTeams') }}</li>
             </ol>
         </div>
     </div>
@@ -24,20 +24,21 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
-                    <a href="{{ url('admin/users/create') }}" class="btn waves-effect waves-light btn-primary"><i class="ti-plus text"></i> {{ trans('global.UserManage.create') }}</a>
                     <div class="table-responsive">
                         <table id="dataTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ trans('global.Reference') }}</th>
+                                    <th>{{ trans('global.UserManage.ReferalId') }}</th>
                                     <th>{{ trans('global.Name') }}</th>
-                                    <th>{{ trans('global.Email') }}</th>
-                                    <th>{{ trans('global.CellPhone') }}</th>
+                                    <th>{{ trans('global.UserManage.IdEmail') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
-                                    <th>{{ trans('global.Role') }}</th>
-                                    <th>{{ trans('global.CreatedAt') }}</th>
-                                    <th>{{ trans('global.Action') }}</th>
+                                    <th>{{ trans('global.CellPhone') }}</th>
+                                    <th>{{ trans('global.UserManage.DateOfRegister') }}</th>
+                                    <th>{{ trans('global.UserManage.LeaderManager') }}</th>
+                                    <th>{{ trans('global.UserManage.NameOfManager') }}</th>
+                                    <th>{{ trans('global.UserManage.Sponsor') }}</th>
+                                    <th>{{ trans('global.UserManage.NameOfSponsor') }}</th>
                                 </tr>
                             </thead>
                             <tfoot>

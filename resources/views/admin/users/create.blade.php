@@ -8,8 +8,8 @@
 	<div class="col-md-7 align-self-center text-right">
 		 <div class="d-flex justify-content-end align-items-center">
 			  <ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="{{ url('/') }}">{{ trans('global.Home.title') }}</a></li>
-					<li class="breadcrumb-item"><a href="{{ url('/admin/users') }}">{{ trans('global.UserManage.title') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/') }}">{{ trans('global.UserManage.title') }}</a></li>
+					<li class="breadcrumb-item"><a href="{{ url('/admin/users') }}">{{ trans('global.UserManage.Users') }}</a></li>
 					<li class="breadcrumb-item active">{{ trans('global.UserManage.create') }}</li>
 			  </ol>
 		 </div>
