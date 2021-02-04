@@ -120,4 +120,7 @@ return [
     'Account'=> [
         'title'=> 'Account'
     ],
+    'Message' => [
+        'activated' => 'Your account is blocked, please contact support.'
+    ]
 ];

@@ -100,7 +100,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'reference' => [],
+            'reference' => ['exists:users,email', 'nullable'],
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users'],
             'cellphone' => ['required'],
@@ -110,6 +110,7 @@ class UserController extends Controller
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
+        $request->reference ?? $validated['reference'] = $validated['email'];
         $user = User::create($validated);
         $user->assignRole($validated['role']);
 
@@ -152,7 +153,7 @@ class UserController extends Controller
     {
         $user = User::query()->whereGuid($guid)->firstOrFail();
         $validated = $request->validate([
-            'reference' => [],
+            'reference' => ['exists:users,email', 'nullable'],
             'name' => ['required'],
             'email' => ['required', 'email', 'unique:users,email,'.$user->id],
             'cellphone' => ['required'],
@@ -160,9 +161,9 @@ class UserController extends Controller
             'role' => ['required']
         ]);
         
-        if ($request->password) {
+        if ($request->password)
             $validated['password'] = Hash::make($request->password);
-        }
+        $request->reference ?? $validated['reference'] = $validated['email'];
         $user->update($validated);
         $user->syncRoles($validated['role']);
 
