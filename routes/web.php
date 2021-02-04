@@ -21,7 +21,7 @@ Route::middleware(['auth', 'verified', 'activated'])->group( function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::group(['prefix' => 'admin', 'as'=>'admin.'], function () {
+    Route::group(['middleware' => 'role:Admin', 'prefix' => 'admin', 'as'=>'admin.'], function () {
         Route::resource('/users', UserController::class);
         Route::post('/users/update-status', [UserController::class, 'postUpdateStatus']);
     });
