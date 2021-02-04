@@ -17,7 +17,7 @@ use App\Http\Controllers\Admin\UserController;
 
 Auth::routes(['verify' => true]);
 
-Route::middleware(['auth', 'verified'])->group( function () {
+Route::middleware(['auth', 'verified', 'activated'])->group( function () {
     Route::get('/', [HomeController::class, 'index']);
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 

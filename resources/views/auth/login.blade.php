@@ -181,8 +181,8 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
             @error('email')
-            <div class="alert-danger p-1 mb-4">
-                <strong>{{ $message }}</strong>
+            <div class="alert alert-danger">
+                {{ $message }}
             </div>
             @enderror
             <div class="inputBox">
