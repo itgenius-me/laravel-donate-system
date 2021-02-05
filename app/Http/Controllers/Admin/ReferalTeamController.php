@@ -35,14 +35,14 @@ class ReferalTeamController extends Controller
         if ($request->ajax()) {
             $limit = $request->input('length');
             $start = $request->input('start');
-            $order = $columns[$request->input('order.0.column')];
+//            $order = $columns[$request->input('order.0.column')];
             $dir = $request->input('order.0.dir');
 
             if(empty($request->input('search.value')))
             {
                 $users = User::query()->offset($start)
                     ->limit($limit)
-                    ->orderBy($order,$dir)
+//                    ->orderBy($order,$dir)
                     ->get();
             } else {
                 $search = $request->input('search.value');
@@ -51,7 +51,7 @@ class ReferalTeamController extends Controller
                     ->orWhere('email', 'LIKE',"%{$search}%")
                     ->offset($start)
                     ->limit($limit)
-                    ->orderBy($order,$dir)
+//                    ->orderBy($order,$dir)
                     ->get();
                 $totalFiltered = User::query()->where('id','LIKE',"%{$search}%")
                     ->orWhere('name', 'LIKE',"%{$search}%")
