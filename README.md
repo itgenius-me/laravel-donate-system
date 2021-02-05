@@ -14,10 +14,6 @@ cp .env.example .env
 ```bash
 php artisan key:generate
 ```
-#### Laravel passport install
-```bash
-php artisan passport:install
-```
 #### Laravel migrate and seed
 ```bash
 php artisan migrate --seed

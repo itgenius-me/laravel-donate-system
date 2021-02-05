@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Validator;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 use Exception;
 use App\Http\Resources\Auth as AuthResource;
@@ -21,23 +21,23 @@ class AuthController extends BaseController
     public function postSignup(Request $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
+            $validated = $request->validate([
                 // 'name' => 'required',
                 'email' => 'required|email|unique:users',
                 'password' => 'required',
                 // 'c_password' => 'required|same:password',
             ]);
-       
-            if($validator->fails()){
-                return $this->sendError('Validation Error.', $validator->errors());       
-            }
-       
-            $input = $request->all();
-            $input['password'] = bcrypt($input['password']);
-            $input['name'] = $input['email'];
-            // $user = User::query()->create($input)->sendEmailVerificationNotification();
-            $user = User::query()->create($input);
-            $success['email'] =  $input['email'];
+        } catch (ValidationException $validationException) {
+            return $this->sendError($validationException->getMessage(), $validationException->errors());
+
+        }
+
+        try {
+            $validated['password'] = bcrypt($validated['password']);
+            $validated['name'] = $validated['email'];
+            // $user = User::query()->create($validated)->sendEmailVerificationNotification();
+            $user = User::query()->create($validated);
+            $success['email'] =  $validated['email'];
         } catch (Exception $exception) {
             return $this->sendError($exception->getMessage());
         }
@@ -74,12 +74,13 @@ class AuthController extends BaseController
      */
     public function postForgotPassword(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email',
-        ]);
-   
-        if($validator->fails()){
-            return $this->sendError('Validation Error.', $validator->errors());       
+        try {
+            $validated = $request->validate([
+                'email' => 'required|email',
+            ]);
+        } catch (ValidationException $validationException) {
+            return $this->sendError($exception->getMessage());
+
         }
 
         $status = Password::sendResetLink(
