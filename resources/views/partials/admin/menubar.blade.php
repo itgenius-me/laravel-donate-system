@@ -11,10 +11,22 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('/admin/users') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                         <i class="icon-people"></i>
                         <span class="hide-menu">{{ __('global.UserManage.title') }}</span>
                     </a>
+                    <ul aria-expanded="false" class="collapse">
+                        <li>
+                            <a href="{{ url('/admin/users') }}">
+                                {{ __('global.UserManage.Users') }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url('/admin/referal-teams') }}">
+                                {{ __('global.UserManage.ReferalTeams') }}
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <a class="waves-effect waves-dark" href="{{ url('/testimonial') }}" aria-expanded="false">

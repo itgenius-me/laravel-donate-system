@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ReferalTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +20,12 @@ Auth::routes(['verify' => true]);
 
 Route::middleware(['auth', 'verified', 'activated'])->group( function () {
     Route::get('/', [HomeController::class, 'index']);
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('home', [HomeController::class, 'index'])->name('home');
 
     Route::group(['middleware' => 'role:Admin', 'prefix' => 'admin', 'as'=>'admin.'], function () {
         Route::resource('/users', UserController::class);
         Route::post('/users/update-status', [UserController::class, 'postUpdateStatus']);
+        Route::get('referal-teams', [ReferalTeamController::class, 'getIndex']);
     });
 
     Route::get('test', function () {
