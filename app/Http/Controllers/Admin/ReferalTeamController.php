@@ -64,7 +64,6 @@ class ReferalTeamController extends Controller
                     $jsonCountries = file_get_contents(base_path('public/assets/countries.json'));
                     $arrayCountries = json_decode($jsonCountries, true);
                     $arrayKey = array_search($row->cellphone_code, array_column($arrayCountries, 'ISD'));
-
                     return $arrayCountries[$arrayKey]['NAME'];
                 })
                 ->editColumn('cellphone', function ($row) {
@@ -74,19 +73,25 @@ class ReferalTeamController extends Controller
                     return Carbon::parse($row->created_at)->toDateTimeString();
                 })
                 ->addColumn('leader_email', function ($row) {
-                    $leader_email = '';
+                    $leader_email = $this->getLeader($row->id);
                     return $leader_email;
                 })
                 ->addColumn('leader_name', function ($row) {
+                    $leader_email = $this->getLeader($row->id);
                     $leader_name = '';
+                    $leader = User::query()->where('email', $leader_email)->get();
+                    if ($leader) $leader_name = $leader->first()->name;
+                    else $leader_name = $row->name;
                     return $leader_name;
                 })
                 ->addColumn('sponsor_email', function ($row) {
-                    $sponsor_email = '';
+                    $sponsor_email = $row->reference == '' ? $row->email : $row->reference;
                     return $sponsor_email;
                 })
                 ->addColumn('sponsor_name', function ($row) {
-                    $sponsor_name = '';
+                    $reference = User::query()->where('email', $row->reference)->get();
+                    if ($reference) $sponsor_name = $reference->first()->name;
+                    else $sponsor_name = $row->name;
                     return $sponsor_name;
                 })
                 ->skipPaging()
@@ -97,5 +102,19 @@ class ReferalTeamController extends Controller
         }
 
         return view('admin.referal-teams.index');
+    }
+
+    public function getLeader($user_id){
+        $user = User::find($user_id);
+        $reference = User::query()->where('email', $user->reference)->get();
+        $reference_email = '';
+        if ($reference) $reference_email = $reference->first()->email;
+        if ($reference_email == $user->email || $reference_email == '') {
+            return $user->email;
+        } else {
+            $referrals = User::query()->where('reference', $reference_email)->count();
+            if (intval($referrals) > 4) return $reference_email;
+            return $this->getLeader($reference->first()->id);
+        }
     }
 }
