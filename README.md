@@ -1,25 +1,13 @@
-# Laravel donate system
+# Laravel MLM system
 
-Donate website using Laravel
+MLM website using Laravel
+![mlm](screenshots/mlm.png)
 ## Installation
-#### Composer install
 ```bash
 composer install
-```
-#### Laravel env
-```bash
 cp .env.example .env
-```
-#### Laravel key generate
-```bash
 php artisan key:generate
-```
-#### Laravel migrate and seed
-```bash
 php artisan migrate --seed
-```
-#### Run server
-```bash
 php artisan serve
 
 http://localhost:8000
