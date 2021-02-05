@@ -29,7 +29,6 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ trans('global.UserManage.ReferalId') }}</th>
                                     <th>{{ trans('global.Name') }}</th>
                                     <th>{{ trans('global.UserManage.IdEmail') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
@@ -44,14 +43,15 @@
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ trans('global.Reference') }}</th>
                                     <th>{{ trans('global.Name') }}</th>
-                                    <th>{{ trans('global.Email') }}</th>
-                                    <th>{{ trans('global.CellPhone') }}</th>
+                                    <th>{{ trans('global.UserManage.IdEmail') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
-                                    <th>{{ trans('global.Role') }}</th>
-                                    <th>{{ trans('global.CreatedAt') }}</th>
-                                    <th>{{ trans('global.Action') }}</th>
+                                    <th>{{ trans('global.CellPhone') }}</th>
+                                    <th>{{ trans('global.UserManage.DateOfRegister') }}</th>
+                                    <th>{{ trans('global.UserManage.LeaderManager') }}</th>
+                                    <th>{{ trans('global.UserManage.NameOfManager') }}</th>
+                                    <th>{{ trans('global.UserManage.Sponsor') }}</th>
+                                    <th>{{ trans('global.UserManage.NameOfSponsor') }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -72,7 +72,7 @@
         background-color: #03a9f3;
         color: #fff;
     }
-    
+
     .jq-icon-success {
         background-color: #00c292;
         color: #fff;
@@ -89,7 +89,7 @@
     }
 
     .alert-rounded {
-        border-radius: 60px; 
+        border-radius: 60px;
     }
 </style>
 @endpush
@@ -103,89 +103,21 @@
         'processing': true,
         'serverSide': true,
         'ajax': {
-            'url': "{{ url('admin/users') }}",
+            'url': "{{ url('admin/referal-teams') }}",
             'type': 'GET'
         },
         'columns': [
             {'data': 'id'},
-            {'data': 'reference'},
             {'data': 'name'},
             {'data': 'email'},
-            {'data': 'cellphone'},
             {'data': 'country'},
-            {'data': 'role'},
+            {'data': 'cellphone'},
             {'data': 'created_at'},
-            {'data': 'action'}
+            {'data': 'leader_email'},
+            {'data': 'leader_name'},
+            {'data': 'sponsor_email'},
+            {'data': 'sponsor_name'},
         ],
     });
-
-    function deleteUser(userId) {
-        Swal.fire({
-            title: "{{ trans('global.Swal.DelConfirm.title') }}",
-            text: "{{ trans('global.Swal.DelConfirm.text') }}",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: "{{ trans('global.Swal.DelConfirm.yes') }}",
-            confirmButtonClass: 'btn btn-primary',
-            cancelButtonClass: 'btn btn-danger ml-1',
-            buttonsStyling: false,
-        }).then(function (result) {
-            if (result.value) {
-                $('#deleteForm'+userId).submit();
-            }
-        })
-    }
-
-    function blockOrUnBlockUser(userId) {
-        Swal.fire({
-            title: "{{ trans('global.Swal.BlockConfirm.title') }}",
-            text: "{{ trans('global.Swal.BlockConfirm.text') }}",
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: "{{ trans('global.Swal.BlockConfirm.yes') }}",
-            confirmButtonClass: 'btn btn-primary',
-            cancelButtonClass: 'btn btn-danger ml-1',
-            buttonsStyling: false,
-        }).then(function (result) {
-            if (result.value) {
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ url('admin/users/update-status') }}",
-                    data: {
-                        'id': userId,
-                        '_token': "{{ csrf_token() }}"
-                    },
-                    success: function (data) {
-                        if (data.success) {
-                            $.toast({
-                                heading: "{{ trans('global.Success') }}",
-                                text: data.message,
-                                position: 'top-right',
-                                loaderBg:'#ff6849',
-                                icon: 'success',
-                                hideAfter: 3000, 
-                                stack: 6
-                            });
-                        } else {
-                            $.toast({
-                                heading: "{{ trans('global.Error') }}",
-                                text: data.message,
-                                position: 'top-right',
-                                loaderBg:'#ff6849',
-                                icon: 'error',
-                                hideAfter: 3000, 
-                                stack: 6
-                            });
-                        }
-                        dataTable.ajax.reload(null, false);
-                    }
-                });
-            }
-        })
-    }
 </script>
 @endpush
