@@ -22,135 +22,140 @@ class UserSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'admin@admin.com',
             'reference' => 'admin@admin.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 9036'
         ]);
         $superAdmin->assignRole('Admin');
 
         $user = User::factory()->create([
-            'name' => 'User',
-            'email' => 'user@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'B',
+            'email' => 'b@user.com',
+            'reference' => 'admin@admin.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User1',
-            'email' => 'user1@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
-        ]);
-        $user->assignRole('User');
-        $user = User::factory()->create([
-            'name' => 'User2',
-            'email' => 'user2@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'C',
+            'email' => 'c@user.com',
+            'reference' => 'admin@admin.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'Use3r',
-            'email' => 'user3@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'D',
+            'email' => 'd@user.com',
+            'reference' => 'admin@admin.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User4',
-            'email' => 'user4@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'E',
+            'email' => 'e@user.com',
+            'reference' => 'admin@admin.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User5',
-            'email' => 'user5@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'F',
+            'email' => 'f@user.com',
+            'reference' => 'admin@admin.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User6',
-            'email' => 'user6@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'G',
+            'email' => 'g@user.com',
+            'reference' => 'b@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User7',
-            'email' => 'user7@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'H',
+            'email' => 'h@user.com',
+            'reference' => 'b@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User8',
-            'email' => 'user8@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'I',
+            'email' => 'i@user.com',
+            'reference' => 'd@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User9',
-            'email' => 'user9@user.com',
-            'reference' => 'user@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'J',
+            'email' => 'j@user.com',
+            'reference' => 'd@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User10',
-            'email' => 'user10@user.com',
-            'reference' => 'user1@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'K',
+            'email' => 'k@user.com',
+            'reference' => 'f@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User11',
-            'email' => 'user11@user.com',
-            'reference' => 'user1@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'L',
+            'email' => 'l@user.com',
+            'reference' => 'i@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User12',
-            'email' => 'user12@user.com',
-            'reference' => 'user1@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'M',
+            'email' => 'm@user.com',
+            'reference' => 'i@user.com',
         ]);
         $user->assignRole('User');
 
         $user = User::factory()->create([
-            'name' => 'User13',
-            'email' => 'user13@user.com',
-            'reference' => 'user2@user.com',
-            'cellphone_code' => 44,
-            'cellphone' => '20 8759 5496'
+            'name' => 'N',
+            'email' => 'n@user.com',
+            'reference' => 'i@user.com',
         ]);
         $user->assignRole('User');
 
+        $user = User::factory()->create([
+            'name' => 'O',
+            'email' => 'o@user.com',
+            'reference' => 'i@user.com',
+        ]);
+        $user->assignRole('User');
+
+        $user = User::factory()->create([
+            'name' => 'P',
+            'email' => 'p@user.com',
+            'reference' => 'i@user.com',
+        ]);
+        $user->assignRole('User');
+
+        $user = User::factory()->create([
+            'name' => 'Q',
+            'email' => 'q@user.com',
+            'reference' => 'j@user.com',
+        ]);
+        $user->assignRole('User');
+
+        $user = User::factory()->create([
+            'name' => 'R',
+            'email' => 'r@user.com',
+            'reference' => 'o@user.com',
+        ]);
+        $user->assignRole('User');
+        
+        $user = User::factory()->create([
+            'name' => 'S',
+            'email' => 's@user.com',
+            'reference' => 'p@user.com',
+        ]);
+        $user->assignRole('User');
+        
+        $user = User::factory()->create([
+            'name' => 'T',
+            'email' => 't@user.com',
+            'reference' => 'p@user.com',
+        ]);
+        $user->assignRole('User');
     }
 }
