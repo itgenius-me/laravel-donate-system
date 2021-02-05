@@ -102,6 +102,7 @@
     var dataTable = $('#dataTable').DataTable({
         'processing': true,
         'serverSide': true,
+        "ordering": false,
         'ajax': {
             'url': "{{ url('admin/referal-teams') }}",
             'type': 'GET'
