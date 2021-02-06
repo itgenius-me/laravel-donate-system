@@ -94,9 +94,14 @@ class ReferalTeamController extends Controller
                     else $sponsor_name = $row->name;
                     return $sponsor_name;
                 })
+                ->addColumn('status', function ($row) {
+                    return '<span class="label label-success">'. __('global.UserManage.Manager') .'</span>';
+                    // return '<span class="label label-info">'. __('global.Participant) .'</span>';
+                })
                 ->skipPaging()
                 ->setTotalRecords($totalData)
                 ->setFilteredRecords($totalFiltered)
+                ->rawColumns(['status'])
                 ->make(true);
             return $result;
         }

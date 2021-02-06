@@ -38,6 +38,7 @@
                                     <th>{{ trans('global.UserManage.NameOfManager') }}</th>
                                     <th>{{ trans('global.UserManage.Sponsor') }}</th>
                                     <th>{{ trans('global.UserManage.NameOfSponsor') }}</th>
+                                    <th>{{ trans('global.UserManage.Status') }}</th>
                                 </tr>
                             </thead>
                             <tfoot>
@@ -52,6 +53,7 @@
                                     <th>{{ trans('global.UserManage.NameOfManager') }}</th>
                                     <th>{{ trans('global.UserManage.Sponsor') }}</th>
                                     <th>{{ trans('global.UserManage.NameOfSponsor') }}</th>
+                                    <th>{{ trans('global.UserManage.Status') }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -118,6 +120,7 @@
             {'data': 'leader_name'},
             {'data': 'sponsor_email'},
             {'data': 'sponsor_name'},
+            {'data': 'status'},
         ],
     });
 </script>

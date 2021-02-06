@@ -106,7 +106,8 @@ class UserController extends Controller
             'cellphone' => ['required'],
             'cellphone_code' => ['required'],
             'password' => ['required'],
-            'role' => ['required']
+            'role' => ['required'],
+            'is_manager' => ['required']
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -158,7 +159,8 @@ class UserController extends Controller
             'email' => ['required', 'email', 'unique:users,email,'.$user->id],
             'cellphone' => ['required'],
             'cellphone_code' => ['required'],
-            'role' => ['required']
+            'role' => ['required'],
+            'is_manager' => ['required']
         ]);
         
         if ($request->password)

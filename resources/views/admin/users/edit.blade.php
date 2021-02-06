@@ -303,6 +303,21 @@
 							</span>
 							@endif
 						</div>
+						
+						<div class="form-group row">
+							<label for="is_manager" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.UserManage.setManager') }}</label>
+							<div class="col-md-10 col-sm-12">
+								<select name="is_manager" class="form-control custom-select">
+									<option value="0" {{ $user->is_manager === 0 ? 'selected' : '' }}>Null</option>
+									<option value="1" {{ $user->is_manager === 1 ? 'selected' : '' }}>{{ __('global.UserManage.Manager') }}</option>
+								</select>
+							</div>
+							@if($errors->has('is_manager'))
+							<span class="invalid-feedback" role="alert">
+								<strong>{{ $errors->first('is_manager') }}</strong>
+							</span>
+							@endif
+						</div>
 
 						<div class="form-group row">
 							<label for="password" class="col-md-2 col-sm-12 col-form-label text-right">{{ trans('global.Password') }}</label>

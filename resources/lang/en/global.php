@@ -41,6 +41,7 @@ return [
     'Success' => 'Success',
     'Error' => 'Error',
     'Submit' => 'Submit',
+    'Participant' => 'Participant',
     'MyAccount' => [
         'title'=> 'My Account',
     ],
@@ -57,6 +58,8 @@ return [
         'edit' => 'Edit User',
         'activated' => 'Activated',
         'inactivated' => 'Inactivated',
+        'setManager' => 'Set Manager Manully',
+        'Manager' => 'Manager',
         'Users' => 'Users',
         'ReferalTeams' => 'Referal Teams',
         'ReferalId' => 'Referal ID',
@@ -66,6 +69,7 @@ return [
         'NameOfManager' => 'Name of Manager(Status Leader)',
         'Sponsor' => 'Sponsor or Referal Direct',
         'NameOfSponsor' => 'Name of Sponsor or Referal Direct',
+        'Status' => 'Status',
         'Message' => [
             'deleteSuccess' => 'The user is deleted successfully.',
             'udpateSuccess' => 'The user is updated successfully.',

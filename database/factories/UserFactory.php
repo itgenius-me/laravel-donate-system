@@ -28,6 +28,8 @@ class UserFactory extends Factory
             'reference' => 'admin@admin.com',
             'cellphone' => $this->faker->tollFreePhoneNumber,
             'cellphone_code' => $this->faker->areaCode,
+            'activated' => 1,
+            'is_manager' => 0,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),

@@ -31,6 +31,7 @@ class User extends Authenticatable
         'cellphone',
         'cellphone_code',
         'activated',
+        'is_manager',
         'password',
     ];
 
