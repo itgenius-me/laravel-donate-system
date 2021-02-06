@@ -16,18 +16,18 @@ class ReferalTeamController extends Controller
      */
     public function getIndex(Request $request)
     {
-        $columns = [
-            0=> 'id',
-            1=> 'name',
-            2=> 'email',
-            3=> 'country',
-            4=> 'cellphone',
-            5=> 'created_at',
-            6=> 'leader_email',
-            7=> 'leader_name',
-            8=> 'sponsor_email',
-            9=> 'sponsor_name',
-        ];
+//        $columns = [
+//            0=> 'id',
+//            1=> 'name',
+//            2=> 'email',
+//            3=> 'country',
+//            4=> 'cellphone',
+//            5=> 'created_at',
+//            6=> 'leader_email',
+//            7=> 'leader_name',
+//            8=> 'sponsor_email',
+//            9=> 'sponsor_name',
+//        ];
         $totalData = User::query()->count();
 
         $totalFiltered = $totalData;
