@@ -13,10 +13,12 @@ use Exception;
 
 class UserController extends Controller
 {
+    protected $defaultManager = 'admin@admin.com';
+
     /**
      * 
      */
-    public function __contruct(Request $request)
+    public function __construct()
     {
         
     }
@@ -111,7 +113,8 @@ class UserController extends Controller
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
-        $request->reference ?? $validated['reference'] = $validated['email'];
+        if (!$validated['reference'])
+            $validated['reference'] = $this->defaultManager;
         $user = User::create($validated);
         $user->assignRole($validated['role']);
 
@@ -165,7 +168,8 @@ class UserController extends Controller
         
         if ($request->password)
             $validated['password'] = Hash::make($request->password);
-        $request->reference ?? $validated['reference'] = $validated['email'];
+        if (!$validated['reference'])
+            $validated['reference'] = $this->defaultManager;
         $user->update($validated);
         $user->syncRoles($validated['role']);
 
