@@ -96,7 +96,7 @@ class ReferalTeamController extends Controller
                 })
                 ->addColumn('status', function ($row) {
                     $referrals = User::query()->where('reference', $row->email)->get();
-                    if ($referrals->count() > 4)
+                    if ($referrals->count() > 4 || intval($row->is_manager) == 1)
                         return '<span class="label label-success">'. __('global.UserManage.Manager') .'</span>';
                     else
                         return '<span class="label label-info">'. __('global.Participant') .'</span>';
@@ -122,7 +122,7 @@ class ReferalTeamController extends Controller
             return $user->email;
         } else {
             $referrals = User::query()->where('reference', $reference_email)->count();
-            if (intval($referrals) > 4) return $reference_email;
+            if (intval($referrals) > 4 || intval($reference->first()->is_manager) == 1) return $reference_email;
             return $this->getLeader($reference->first()->id);
         }
     }

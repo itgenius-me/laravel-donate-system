@@ -16,12 +16,15 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    @yield('linked_fonts')
-
-    @include('partials.admin.stylesheet')
-
-    @yield('linked_css')
+    @hasrole("Admin")
+        @yield('linked_fonts')
+        @include('partials.admin.stylesheet')
+        @yield('linked_css')
+    @else
+        @yield('linked_fonts')
+        @include('partials.user.stylesheet')
+        @yield('linked_css')
+    @endrole
 </head>
 <body class="skin-blue fixed-layout">
     <!-- ============================================================== -->
@@ -34,69 +37,33 @@
         </div>
     </div>
 
-    <!-- ============================================================== -->
-    <!-- Main wrapper - style you can find in pages.scss -->
-    <!-- ============================================================== -->
-    <div id="main-wrapper">
-        <!-- ============================================================== -->
-        <!-- Topbar header - style you can find in pages.scss -->
-        <!-- ============================================================== -->
-        @include('partials.admin.topbar')
-        <!-- ============================================================== -->
-        <!-- End Topbar header -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        @include('partials.admin.menubar')
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Page wrapper  -->
-        <!-- ============================================================== -->
-        <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
-            <!-- ============================================================== -->
-            <div class="container-fluid">
-                <!-- Start Page Content -->
-                <!-- ============================================================== -->
-                @yield('content')
-                <!-- ============================================================== -->
-                <!-- End PAge Content -->
-                <!-- ============================================================== -->
-                <!-- ============================================================== -->
-                <!-- Right sidebar -->
-                <!-- ============================================================== -->
-                <!-- Start Right-sidebar -->
-                @include('partials.admin.r-sidebar')
-                <!-- ============================================================== -->
-                <!-- End Right sidebar -->
-                <!-- ============================================================== -->
+    @hasrole("Admin")
+        <div id="main-wrapper">
+            @include('partials.admin.topbar')
+            @include('partials.admin.menubar')
+            <div class="page-wrapper">
+                <div class="container-fluid">
+                    @yield('content')
+                    @include('partials.admin.r-sidebar')
+                </div>
             </div>
-            <!-- ============================================================== -->
-            <!-- End Container fluid  -->
-            <!-- ============================================================== -->
+            @include('partials.admin.footerbar')
         </div>
-        <!-- ============================================================== -->
-        <!-- End Page wrapper  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
-        @include('partials.admin.footerbar')
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
-    @include('partials.admin.javascript')
+        @include('partials.admin.javascript')
+    @else
+        <div id="main-wrapper">
+            @include('partials.user.topbar')
+            @include('partials.user.menubar')
+            <div class="page-wrapper">
+                <div class="container-fluid">
+                    @yield('content')
+                    @include('partials.user.r-sidebar')
+                </div>
+            </div>
+            @include('partials.user.footerbar')
+        </div>
+        @include('partials.user.javascript')
+    @endrole
 </body>
 
 </html>
