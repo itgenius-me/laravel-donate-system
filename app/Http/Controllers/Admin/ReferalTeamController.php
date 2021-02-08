@@ -95,7 +95,11 @@ class ReferalTeamController extends Controller
                     return $sponsor_name;
                 })
                 ->addColumn('status', function ($row) {
-                    return '<span class="label label-success">'. __('global.UserManage.Manager') .'</span>';
+                    $referrals = User::query()->where('reference', $row->email)->get();
+                    if ($referrals->count() > 4)
+                        return '<span class="label label-success">'. __('global.UserManage.Manager') .'</span>';
+                    else
+                        return '<span class="label label-info">'. __('global.Participant') .'</span>';
                     // return '<span class="label label-info">'. __('global.Participant) .'</span>';
                 })
                 ->skipPaging()
