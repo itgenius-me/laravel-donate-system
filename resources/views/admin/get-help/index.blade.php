@@ -2,13 +2,13 @@
 @section('content')
 <div class="row page-titles">
     <div class="col-md-5 align-self-center">
-        <h4 class="text-themecolor">{{ trans('global.UserManage.ReferalTeams') }}</h4>
+        <h4 class="text-themecolor">{{ trans('global.OrderManage.GetHelp.title') }}</h4>
     </div>
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">{{ trans('global.UserManage.title') }}</li>
-                <li class="breadcrumb-item active">{{ trans('global.UserManage.ReferalTeams') }}</li>
+                <li class="breadcrumb-item">{{ trans('global.OrderManage.title') }}</li>
+                <li class="breadcrumb-item active">{{ trans('global.OrderManage.GetHelp.title') }}</li>
             </ol>
         </div>
     </div>
@@ -24,36 +24,35 @@
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
+                    <a href="{{ url('admin/get-help/create') }}" class="btn waves-effect waves-light btn-primary"><i class="ti-plus text"></i> {{ trans('global.OrderManage.GetHelp.Create') }}</a>
                     <div class="table-responsive">
                         <table id="dataTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ trans('global.Name') }}</th>
-                                    <th>{{ trans('global.UserManage.IdEmail') }}</th>
+                                    <th>{{ trans('global.Email') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Email-Manager') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
-                                    <th>{{ trans('global.CellPhone') }}</th>
-                                    <th>{{ trans('global.UserManage.DateOfRegister') }}</th>
-                                    <th>{{ trans('global.UserManage.LeaderManager') }}</th>
-                                    <th>{{ trans('global.UserManage.NameOfManager') }}</th>
-                                    <th>{{ trans('global.UserManage.Sponsor') }}</th>
-                                    <th>{{ trans('global.UserManage.NameOfSponsor') }}</th>
-                                    <th>{{ trans('global.UserManage.Status') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Date') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Amount') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Confirmed-Amount') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Type') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Status') }}</th>
+                                    <th width="100px">{{ trans('global.Action') }}</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
                                     <th>#</th>
-                                    <th>{{ trans('global.Name') }}</th>
-                                    <th>{{ trans('global.UserManage.IdEmail') }}</th>
+                                    <th>{{ trans('global.Email') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Email-Manager') }}</th>
                                     <th>{{ trans('global.Country') }}</th>
-                                    <th>{{ trans('global.CellPhone') }}</th>
-                                    <th>{{ trans('global.UserManage.DateOfRegister') }}</th>
-                                    <th>{{ trans('global.UserManage.LeaderManager') }}</th>
-                                    <th>{{ trans('global.UserManage.NameOfManager') }}</th>
-                                    <th>{{ trans('global.UserManage.Sponsor') }}</th>
-                                    <th>{{ trans('global.UserManage.NameOfSponsor') }}</th>
-                                    <th>{{ trans('global.UserManage.Status') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Date') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Amount') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Confirmed-Amount') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Type') }}</th>
+                                    <th>{{ trans('global.OrderManage.GetHelp.Status') }}</th>
+                                    <th>{{ trans('global.Action') }}</th>
                                 </tr>
                             </tfoot>
                         </table>
@@ -106,22 +105,41 @@
         'serverSide': true,
         "ordering": false,
         'ajax': {
-            'url': "{{ url('admin/referal-teams') }}",
+            'url': "{{ url('admin/get-help') }}",
             'type': 'GET'
         },
         'columns': [
             {'data': 'id'},
-            {'data': 'name'},
             {'data': 'email'},
-            {'data': 'country'},
-            {'data': 'cellphone'},
-            {'data': 'created_at'},
             {'data': 'leader_email'},
-            {'data': 'leader_name'},
-            {'data': 'sponsor_email'},
-            {'data': 'sponsor_name'},
+            {'data': 'country'},
+            {'data': 'date_of_get_help'},
+            {'data': 'amount'},
+            {'data': 'confirmed_amount'},
+            {'data': 'type'},
             {'data': 'status'},
+            {'data': 'action'},
         ],
     });
+
+    function deleteGetHelp(id) {
+        Swal.fire({
+            title: "{{ trans('global.Swal.DelConfirm.title') }}",
+            text: "{{ trans('global.Swal.DelConfirm.text') }}",
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: "{{ trans('global.Swal.DelConfirm.yes') }}",
+            confirmButtonClass: 'btn btn-primary',
+            cancelButtonClass: 'btn btn-danger ml-1',
+            buttonsStyling: false,
+        }).then(function (result) {
+            if (result.value) {
+                $('#deleteForm'+id).submit();
+            }
+        })
+    }
+
 </script>
 @endpush

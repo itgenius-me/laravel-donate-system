@@ -73,12 +73,11 @@ class ReferalTeamController extends Controller
                     return Carbon::parse($row->created_at)->toDateTimeString();
                 })
                 ->addColumn('leader_email', function ($row) {
-                    $leader_email = $this->getLeader($row->id);
+                    $leader_email = User::getLeaderEmail($row->id);
                     return $leader_email;
                 })
                 ->addColumn('leader_name', function ($row) {
-                    $leader_email = $this->getLeader($row->id);
-                    $leader_name = '';
+                    $leader_email = User::getLeaderEmail($row->id);
                     $leader = User::query()->where('email', $leader_email)->get();
                     if ($leader) $leader_name = $leader->first()->name;
                     else $leader_name = $row->name;
@@ -100,7 +99,6 @@ class ReferalTeamController extends Controller
                         return '<span class="label label-success">'. __('global.UserManage.Manager') .'</span>';
                     else
                         return '<span class="label label-info">'. __('global.Participant') .'</span>';
-                    // return '<span class="label label-info">'. __('global.Participant) .'</span>';
                 })
                 ->skipPaging()
                 ->setTotalRecords($totalData)
@@ -111,19 +109,5 @@ class ReferalTeamController extends Controller
         }
 
         return view('admin.referal-teams.index');
-    }
-
-    public function getLeader($user_id){
-        $user = User::find($user_id);
-        $reference = User::query()->where('email', $user->reference)->get();
-        $reference_email = '';
-        if ($reference) $reference_email = $reference->first()->email;
-        if ($reference_email == $user->email || $reference_email == '') {
-            return $user->email;
-        } else {
-            $referrals = User::query()->where('reference', $reference_email)->count();
-            if (intval($referrals) > 4 || intval($reference->first()->is_manager) == 1) return $reference_email;
-            return $this->getLeader($reference->first()->id);
-        }
     }
 }

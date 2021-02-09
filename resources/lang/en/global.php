@@ -89,6 +89,18 @@ return [
         ],
         'GetHelp'=> [
             'title'=> 'Get Help',
+            'Create'=> 'Create Get Help',
+            'Edit'=> 'Edit Get Help',
+            'Email-Manager'=> 'Email of Manager Leader',
+            'Date'=> 'Date of Get Help',
+            'Amount'=> 'Amount of Get Help',
+            'Confirmed-Amount'=> 'Confirmed Amount', // Received $
+            'Type'=> 'Type of Currency',
+            'Status'=> 'Status', // of Provide Help
+            'Confirmed'=> 'Confirmed',
+            'Unconfirmed'=> 'Unconfirmed',
+            'Local'=> 'Local',
+            'Cripto'=> 'Cripto',
         ],
         'ProvideHelp'=> [
             'title'=> 'Provide Help',

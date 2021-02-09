@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ReferalTeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +24,14 @@ Route::middleware(['auth', 'verified', 'activated'])->group( function () {
     Route::group(['middleware' => 'role:Admin', 'prefix' => 'admin', 'as'=>'admin.'], function () {
         Route::resource('/users', UserController::class);
         Route::post('/users/update-status', [UserController::class, 'postUpdateStatus']);
-        Route::get('referal-teams', [ReferalTeamController::class, 'getIndex']);
+        Route::get('referal-teams', [App\Http\Controllers\Admin\ReferalTeamController::class, 'getIndex']);
+
+        Route::get('get-help', [App\Http\Controllers\Admin\GHelpController::class, 'index']);
+        Route::get('get-help/create', [App\Http\Controllers\Admin\GHelpController::class, 'create']);
+        Route::post('get-help/store', [App\Http\Controllers\Admin\GHelpController::class, 'store']);
+        Route::get('get-help/edit/{id}', [App\Http\Controllers\Admin\GHelpController::class, 'edit'])->name('get-help.edit');
+        Route::post('get-help/update/{id}', [App\Http\Controllers\Admin\GHelpController::class, 'update'])->name('get-help.update');
+        Route::delete('get-help/destroy/{id}', [App\Http\Controllers\Admin\GHelpController::class, 'destroy'])->name('get-help.destroy');
     });
 
     Route::get('test', function () {

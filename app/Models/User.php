@@ -53,4 +53,18 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    static function getLeaderEmail($user_id){
+        $user = self::find($user_id);
+        $reference = self::query()->where('email', $user->reference)->get();
+        $reference_email = '';
+        if ($reference) $reference_email = $reference->first()->email;
+        if ($reference_email == $user->email || $reference_email == '') {
+            return $user->email;
+        } else {
+            $referrals = self::query()->where('reference', $reference_email)->count();
+            if (intval($referrals) > 4 || intval($reference->first()->is_manager) == 1) return $reference_email;
+            return self::getLeaderEmail($reference->first()->id);
+        }
+    }
 }
