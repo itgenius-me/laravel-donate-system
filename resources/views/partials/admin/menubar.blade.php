@@ -45,13 +45,13 @@
                                 {{ __('global.OrderManage.ViewOrders.title') }}
                             </a>
                         </li>
+{{--                        <li>--}}
+{{--                            <a href="{{ url('/view-orders-disputed') }}">--}}
+{{--                                {{ __('global.OrderManage.ViewOrdersDisputed.title') }}--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                         <li>
-                            <a href="{{ url('/view-orders-disputed') }}">
-                                {{ __('global.OrderManage.ViewOrdersDisputed.title') }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ url('/get-help') }}">
+                            <a href="{{ url('/admin/get-help') }}">
                                 {{ __('global.OrderManage.GetHelp.title') }}
                             </a>
                         </li>
@@ -60,11 +60,11 @@
                                 {{ __('global.OrderManage.ProvideHelp.title') }}
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ url('/view-growth') }}">
-                                {{ __('global.OrderManage.ViewGrowth.title') }}
-                            </a>
-                        </li>
+{{--                        <li>--}}
+{{--                            <a href="{{ url('/view-growth') }}">--}}
+{{--                                {{ __('global.OrderManage.ViewGrowth.title') }}--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                     </ul>
                 </li>
                 <li>
