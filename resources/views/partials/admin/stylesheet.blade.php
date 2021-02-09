@@ -1,3 +1,6 @@
+
+@stack('css')
+
 <link href="{{ asset('dist/css/style.css') }}" rel="stylesheet">
 <style>
     .topbar .top-navbar .navbar-header .navbar-brand .light-logo {
@@ -8,5 +11,3 @@
         padding-left: 0px;
     }
 </style>
-
-@stack('css')
