@@ -7,7 +7,7 @@
     <div class="col-md-7 align-self-center text-right">
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ url('/') }}">{{ trans('global.UserManage.title') }}</a></li>
+                <li class="breadcrumb-item">{{ trans('global.UserManage.title') }}</li>
                 <li class="breadcrumb-item active">{{ trans('global.UserManage.ReferalTeams') }}</li>
             </ol>
         </div>
