@@ -96,7 +96,7 @@ return [
             'Amount'=> 'Amount of Get Help',
             'Confirmed-Amount'=> 'Confirmed Amount', // Received $
             'Type'=> 'Type of Currency',
-            'Status'=> 'Status', // of Provide Help
+            'Status'=> 'Status', // of Get Help
             'Confirmed'=> 'Confirmed',
             'Unconfirmed'=> 'Unconfirmed',
             'Local'=> 'Local',
@@ -104,6 +104,17 @@ return [
         ],
         'ProvideHelp'=> [
             'title'=> 'Provide Help',
+            'Create'=> 'Create Provide Help',
+            'Edit'=> 'Edit Provide Help',
+            'Email-Manager'=> 'Email of Manager Leader',
+            'Date'=> 'Date of Provide Help',
+            'Amount'=> 'Amount of Provide Help',
+            'Type'=> 'Type of Currency',
+            'Status'=> 'Status', // of Provide Help
+            'Confirmed'=> 'Confirmed',
+            'Unconfirmed'=> 'Unconfirmed',
+            'Local'=> 'Local',
+            'Cripto'=> 'Cripto',
         ],
         'ViewGrowth'=> [
             'title'=> 'View Growth',
