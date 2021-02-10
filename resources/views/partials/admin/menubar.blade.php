@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ url('/provide-help') }}">
+                            <a href="{{ url('/admin/provide-help') }}">
                                 {{ __('global.OrderManage.ProvideHelp.title') }}
                             </a>
                         </li>
