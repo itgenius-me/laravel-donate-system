@@ -32,6 +32,13 @@ Route::middleware(['auth', 'verified', 'activated'])->group( function () {
         Route::get('get-help/edit/{id}', [App\Http\Controllers\Admin\GHelpController::class, 'edit'])->name('get-help.edit');
         Route::post('get-help/update/{id}', [App\Http\Controllers\Admin\GHelpController::class, 'update'])->name('get-help.update');
         Route::delete('get-help/destroy/{id}', [App\Http\Controllers\Admin\GHelpController::class, 'destroy'])->name('get-help.destroy');
+
+        Route::get('provide-help', [App\Http\Controllers\Admin\PHelpController::class, 'index']);
+        Route::get('provide-help/create', [App\Http\Controllers\Admin\PHelpController::class, 'create']);
+        Route::post('provide-help/store', [App\Http\Controllers\Admin\PHelpController::class, 'store']);
+        Route::get('provide-help/edit/{id}', [App\Http\Controllers\Admin\PHelpController::class, 'edit'])->name('provide-help.edit');
+        Route::post('provide-help/update/{id}', [App\Http\Controllers\Admin\PHelpController::class, 'update'])->name('provide-help.update');
+        Route::delete('provide-help/destroy/{id}', [App\Http\Controllers\Admin\PHelpController::class, 'destroy'])->name('provide-help.destroy');
     });
 
     Route::get('test', function () {
