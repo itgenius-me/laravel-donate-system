@@ -19,7 +19,7 @@ class CreateGHelpsTable extends Migration
             $table->double('amount')->default(0)->comment('amount of get help');
             $table->double('confirmed_amount')->nullable()->default(0)->comment('confirmed amount received');
             $table->string('type', 191)->comment('type of currency(1: local, 2: cripto)');
-            $table->integer('status')->default(0)->comment('status of provide help(0: unconfirmed, 1:confirmed)');
+            $table->integer('status')->default(0)->comment('status of get help(0: unconfirmed, 1:confirmed)');
             $table->timestamps();
         });
     }
