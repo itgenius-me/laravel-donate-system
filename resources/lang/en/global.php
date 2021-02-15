@@ -122,6 +122,7 @@ return [
     ],
     'OrderGenerate' => [
         'title'=> 'Order Generate',
+        'Percent'=> '% of Provide Help'
     ],
     'Application' => [
         'title'=> 'Application',

@@ -25,7 +25,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-bordered table-striped">
+                        <table id="dataTable" class="table table-bordered table-striped nowrap" width="100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -105,6 +105,7 @@
         'processing': true,
         'serverSide': true,
         "ordering": false,
+        "scrollX": true,
         'ajax': {
             'url': "{{ url('admin/referal-teams') }}",
             'type': 'GET'

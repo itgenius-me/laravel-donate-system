@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <a href="{{ url('admin/users/create') }}" class="btn waves-effect waves-light btn-primary"><i class="ti-plus text"></i> {{ trans('global.UserManage.create') }}</a>
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-bordered table-striped">
+                        <table id="dataTable" class="table table-bordered table-striped nowrap" width="100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -71,7 +71,7 @@
         background-color: #03a9f3;
         color: #fff;
     }
-    
+
     .jq-icon-success {
         background-color: #00c292;
         color: #fff;
@@ -88,7 +88,7 @@
     }
 
     .alert-rounded {
-        border-radius: 60px; 
+        border-radius: 60px;
     }
 </style>
 @endpush
@@ -101,6 +101,7 @@
     var dataTable = $('#dataTable').DataTable({
         'processing': true,
         'serverSide': true,
+        'scrollX': true,
         'ajax': {
             'url': "{{ url('admin/users') }}",
             'type': 'GET'
@@ -166,7 +167,7 @@
                                 position: 'top-right',
                                 loaderBg:'#ff6849',
                                 icon: 'success',
-                                hideAfter: 3000, 
+                                hideAfter: 3000,
                                 stack: 6
                             });
                         } else {
@@ -176,7 +177,7 @@
                                 position: 'top-right',
                                 loaderBg:'#ff6849',
                                 icon: 'error',
-                                hideAfter: 3000, 
+                                hideAfter: 3000,
                                 stack: 6
                             });
                         }

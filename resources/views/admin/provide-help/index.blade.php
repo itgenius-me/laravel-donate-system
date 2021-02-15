@@ -26,7 +26,7 @@
                 <div class="card-body">
                     <a href="{{ url('admin/provide-help/create') }}" class="btn waves-effect waves-light btn-primary"><i class="ti-plus text"></i> {{ trans('global.OrderManage.ProvideHelp.Create') }}</a>
                     <div class="table-responsive">
-                        <table id="dataTable" class="table table-bordered table-striped">
+                        <table id="dataTable" class="table table-bordered table-striped nowrap" width="100%">
                             <thead>
                                 <tr>
                                     <th>#</th>
@@ -102,6 +102,7 @@
         'processing': true,
         'serverSide': true,
         "ordering": false,
+        'scrollX': true,
         'ajax': {
             'url': "{{ url('admin/provide-help') }}",
             'type': 'GET'
