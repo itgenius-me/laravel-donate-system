@@ -39,6 +39,10 @@ Route::middleware(['auth', 'verified', 'activated'])->group( function () {
         Route::get('provide-help/edit/{id}', [App\Http\Controllers\Admin\PHelpController::class, 'edit'])->name('provide-help.edit');
         Route::post('provide-help/update/{id}', [App\Http\Controllers\Admin\PHelpController::class, 'update'])->name('provide-help.update');
         Route::delete('provide-help/destroy/{id}', [App\Http\Controllers\Admin\PHelpController::class, 'destroy'])->name('provide-help.destroy');
+
+        Route::get('create-order', [App\Http\Controllers\Admin\CreateOrderController::class, 'index']);
+        Route::get('create-order/get-help', [App\Http\Controllers\Admin\CreateOrderController::class, 'getHelps']);
+        Route::get('create-order/provide-help', [App\Http\Controllers\Admin\CreateOrderController::class, 'provideHelps']);
     });
 
     Route::get('test', function () {

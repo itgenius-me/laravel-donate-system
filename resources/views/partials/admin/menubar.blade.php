@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                    <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                         <i class="icon-people"></i>
                         <span class="hide-menu">{{ __('global.UserManage.title') }}</span>
                     </a>
@@ -68,7 +68,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('/order-generate') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('/admin/create-order') }}" aria-expanded="false">
                         <i class="mdi mdi-calendar-plus"></i>
                         <span class="hide-menu">{{ __('global.OrderGenerate.title') }}</span>
                     </a>
