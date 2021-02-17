@@ -21,6 +21,7 @@ class PHelp extends Model
         'email',
         'amount',
         'type',
+        'currency',
     ];
 
 }

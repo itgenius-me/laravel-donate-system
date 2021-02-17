@@ -46,14 +46,17 @@
                             @endif
                         </div>
                         <div class="form-group">
-                            <label for="type" class="col-form-label text-right">{{ trans('global.OrderManage.ProvideHelp.Type') }} <span class="text-danger">*</span></label>
-                            <select id="type" name="type" class="select2 form-control custom-select @error('type') is-invalid @enderror" style="width: 100%; height:36px;">
-                                <option value="1" @if($pHelp->type == 1) selected @endif>Local</option>
-                                <option value="2" @if($pHelp->type == 2) selected @endif>Cripto</option>
+                            <label for="currency" class="col-form-label text-right">{{ trans('global.currency') }} <span class="text-danger">*</span></label>
+                            <select id="currency" name="currency" class="select2 form-control custom-select @error('currency') is-invalid @enderror" style="width: 100%; height:36px;">
+                                @foreach($currencies as $currency)
+                                    <option value="{{ $currency->currency }}" @if($pHelp->currency==$currency->currency) selected @endif>
+                                        {{ $currency->currency }}
+                                    </option>
+                                @endforeach
                             </select>
-                            @if($errors->has('type'))
+                            @if($errors->has('currency'))
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $errors->first('type') }}</strong>
+                                    <strong>{{ $errors->first('currency') }}</strong>
                                 </span>
                             @endif
                         </div>
