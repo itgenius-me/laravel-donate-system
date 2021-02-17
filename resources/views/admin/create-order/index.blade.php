@@ -19,6 +19,10 @@
         <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
     </div>
     @endif
+    <button disabled id="btnCreate" class="btn waves-effect waves-light btn-primary mb-2">
+        <i class="ti-plus text"></i>
+        {{ trans('global.OrderGenerate.title') }}
+    </button>
     <div class="row">
         <div class="col-md-6">
             <div class="card">
@@ -31,14 +35,14 @@
                             <thead>
                             <tr>
                                 <th>
-                                    <button style="border: none; background: transparent; font-size: 14px; width: 100%" id="gTableBtn">
-                                        <i class="far fa-square"></i>
-                                    </button>
+{{--                                    <button style="border: none; background: transparent; font-size: 14px; width: 100%" id="gTableBtn">--}}
+{{--                                        <i class="far fa-square"></i>--}}
+{{--                                    </button>--}}
                                 </th>
                                 <th>#</th>
                                 <th>{{ trans('global.Email') }}</th>
                                 <th>{{ trans('global.OrderManage.GetHelp.Date') }}</th>
-                                <th>{{ trans('global.OrderManage.GetHelp.Amount') }}</th>
+                                <th>{{ trans('global.OrderGenerate.Remain_Amount') }}</th>
                             </tr>
                             </thead>
 {{--                            <tfoot>--}}
@@ -65,15 +69,15 @@
                             <thead>
                                 <tr>
                                     <th>
-                                        <button style="border: none; background: transparent; font-size: 14px; width: 100%" id="pTableBtn">
-                                            <i class="far fa-square"></i>
-                                        </button>
+{{--                                        <button style="border: none; background: transparent; font-size: 14px; width: 100%" id="pTableBtn">--}}
+{{--                                            <i class="far fa-square"></i>--}}
+{{--                                        </button>--}}
                                     </th>
                                     <th>#</th>
                                     <th>{{ trans('global.Email') }}</th>
                                     <th>{{ trans('global.OrderManage.ProvideHelp.Date') }}</th>
                                     <th>{{ trans('global.OrderManage.ProvideHelp.Amount') }}</th>
-                                    <th>{{ trans('global.OrderGenerate.Percent') }}</th>
+                                    <th>{{ trans('global.OrderGenerate.Remain_Amount') }}</th>
                                 </tr>
                             </thead>
 {{--                            <tfoot>--}}
@@ -139,6 +143,10 @@
     #gTableBtn:focus, #pTableBtn:focus {
         outline:0;
     }
+    .btn-primary.disabled, .btn-primary:disabled {
+        color: white !important;
+        opacity: 0.3;
+    }
 </style>
 @endpush
 
@@ -149,6 +157,7 @@
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 <script>
 
+    var gCnt = 0, pCnt = 0;
     var gTable = $('#gTable').DataTable({
         'processing': true,
         'serverSide': true,
@@ -166,7 +175,7 @@
             {'data': 'id'},
             {'data': 'email'},
             {'data': 'date_of_get_help'},
-            {'data': 'amount'},
+            {'data': 'remain_amount'},
         ],
         columnDefs: [ {
             orderable: false,
@@ -174,11 +183,15 @@
             targets:   0
         } ],
         select: {
-            style:    'multi',
+            style:    'os',
             selector: 'td:first-child'
         },
     });
     $('#gTableBtn').click(function() {
+
+        if (pTable.rows('.selected').data().length > 1)
+            return;
+
         if (gTable.rows({
             selected: true
         }).count() > 0) {
@@ -190,6 +203,7 @@
     });
     gTable.on('select deselect', function(e, dt, type, indexes) {
         if (type === 'row') {
+            checkSum();
             // We may use dt instead of myTable to have the freshest data.
             if (dt.rows().count() === dt.rows({
                 selected: true
@@ -211,7 +225,41 @@
             $('#gTableBtn i').attr('class', 'far fa-minus-square');
         }
     });
+    var checkSum = function () {
+        var get_total = 0;
+        gCnt = 0; pCnt = 0;
+        $.each(gTable.rows('.selected').data(), function () {
+            get_total += this.amount;
+            ++gCnt;
+        });
 
+        var provide_total = 0;
+        $.each(pTable.rows('.selected').data(), function () {
+            provide_total += this.amount;
+            ++pCnt;
+        });
+
+        // if (gCnt > 1)
+        //     pTable.select.style( 'os' );
+        // else
+        //     pTable.select.style( 'multi' );
+        //
+        // if (pCnt > 1)
+        //     gTable.select.style( 'os' );
+        // else
+        //     gTable.select.style( 'multi' );
+        //
+        // if (pCnt < 2 && gCnt < 2) {
+        //     gTable.select.style('multi');
+        //     pTable.select.style( 'multi' );
+        // }
+
+        if (get_total >= provide_total && get_total !== 0 && provide_total !== 0) {
+            $("#btnCreate").removeAttr("disabled");
+        } else {
+            $("#btnCreate").attr("disabled", "disabled");
+        }
+    }
     var pTable = $('#pTable').DataTable({
         'processing': true,
         'serverSide': true,
@@ -230,7 +278,7 @@
             {'data': 'email'},
             {'data': 'date_of_provide_help'},
             {'data': 'amount'},
-            {'data': 'percent'},
+            {'data': 'remain_amount'},
         ],
         columnDefs: [ {
             orderable: false,
@@ -244,6 +292,10 @@
     });
 
     $('#pTableBtn').click(function() {
+
+        if (gTable.rows('.selected').data().length > 1)
+            return;
+
         if (pTable.rows({
             selected: true
         }).count() > 0) {
@@ -255,6 +307,7 @@
     });
     pTable.on('select deselect', function(e, dt, type, indexes) {
         if (type === 'row') {
+            checkSum();
             // We may use dt instead of myTable to have the freshest data.
             if (dt.rows().count() === dt.rows({
                 selected: true
@@ -276,5 +329,30 @@
             $('#pTableBtn i').attr('class', 'far fa-minus-square');
         }
     });
+
+    $("#btnCreate").click(function () {
+        var gh_ids, ph_ids;
+        $.each(gTable.rows('.selected').data(), function () {
+            gh_ids = this;
+        });
+
+        $.each(pTable.rows('.selected').data(), function () {
+            ph_ids = this;
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('admin/create-order/order-generate') }}",
+            data: {
+                "_token": "{{ csrf_token() }}",
+                'gh_ids': gh_ids,
+                'ph_ids': ph_ids
+            },
+            success: function (data) {
+                gTable.ajax.reload(null, false);
+                pTable.ajax.reload(null, false);
+            }
+        });
+    })
 </script>
 @endpush
