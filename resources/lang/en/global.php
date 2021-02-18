@@ -125,6 +125,13 @@ return [
         'title'=> 'Order Generate',
         'Percent'=> '% of Provide Help',
         'Remain_Amount'=> 'Remain Amount',
+        'first_10'=> '10% First',
+        'first_40'=> '40% First',
+        'second_10'=> '10% Second(All)',
+        'second_40'=> '40% Second',
+        'gh_manager'=> 'Manager of Get Help',
+        'ph_manager'=> 'Manager of Provide Help',
+        'date_range'=> 'Date Range',
     ],
     'Application' => [
         'title'=> 'Application',
