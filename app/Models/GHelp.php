@@ -21,6 +21,7 @@ class GHelp extends Model
         'email',
         'amount',
         'type',
+        'currency',
     ];
 
 }

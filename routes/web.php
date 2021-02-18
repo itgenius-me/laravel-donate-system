@@ -43,6 +43,8 @@ Route::middleware(['auth', 'verified', 'activated'])->group( function () {
         Route::get('create-order', [App\Http\Controllers\Admin\CreateOrderController::class, 'index']);
         Route::get('create-order/get-help', [App\Http\Controllers\Admin\CreateOrderController::class, 'getHelps']);
         Route::get('create-order/provide-help', [App\Http\Controllers\Admin\CreateOrderController::class, 'provideHelps']);
+        Route::post('create-order/order-generate-multi', [App\Http\Controllers\Admin\CreateOrderController::class, 'generateMulti']);
+        Route::post('create-order/order-generate', [App\Http\Controllers\Admin\CreateOrderController::class, 'generate']);
     });
 
     Route::get('test', function () {

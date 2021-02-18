@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\GHelp;
 use App\Models\User;
 use Carbon\Carbon;
@@ -105,7 +106,8 @@ class GHelpController extends Controller
     public function create()
     {
         $emails = User::all()->pluck('email');
-        return view('admin.get-help.create', compact('emails'));
+        $currencies = Currency::all();
+        return view('admin.get-help.create', compact('emails', 'currencies'));
     }
 
     /**
@@ -117,11 +119,12 @@ class GHelpController extends Controller
     {
         $validated = $request->validate([
             'email' => ['exists:users,email', 'required'],
-            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/']
+            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'],
+            'currency' => ['required'],
         ], [
             'amount.regex' => 'The :attribute should be double',
         ]);
-        $validated['type'] = $request->type;
+        $validated['type'] = Currency::query()->where('currency', $request->currency)->get()->first()->type;
         GHelp::create($validated);
 
         return redirect('/admin/get-help');
@@ -135,7 +138,8 @@ class GHelpController extends Controller
     {
         $emails = User::all()->pluck('email');
         $gHelp = GHelp::query()->find($id);
-        return view('admin.get-help.edit', compact('emails', 'gHelp'));
+        $currencies = Currency::all();
+        return view('admin.get-help.edit', compact('emails', 'gHelp', 'currencies'));
     }
 
     /**
@@ -149,11 +153,12 @@ class GHelpController extends Controller
         $gHelp = GHelp::query()->find($id);
         $validated = $request->validate([
             'email' => ['exists:users,email', 'required'],
-            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/']
+            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'],
+            'currency' => ['required'],
         ], [
             'amount.regex' => 'The :attribute should be double',
         ]);
-        $validated['type'] = $request->type;
+        $validated['type'] = Currency::query()->where('currency', $request->currency)->get()->first()->type;
         $gHelp->update($validated);
 
         return redirect('/admin/get-help');

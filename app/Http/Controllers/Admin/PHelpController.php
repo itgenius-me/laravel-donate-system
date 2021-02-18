@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Currency;
 use App\Models\PHelp;
 use App\Models\User;
 use Carbon\Carbon;
@@ -105,7 +106,8 @@ class PHelpController extends Controller
     public function create()
     {
         $emails = User::all()->pluck('email');
-        return view('admin.provide-help.create', compact('emails'));
+        $currencies = Currency::all();
+        return view('admin.provide-help.create', compact('emails', 'currencies'));
     }
 
     /**
@@ -117,11 +119,12 @@ class PHelpController extends Controller
     {
         $validated = $request->validate([
             'email' => ['exists:users,email', 'required'],
-            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/']
+            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'],
+            'currency' => ['required'],
         ], [
             'amount.regex' => 'The :attribute should be double',
         ]);
-        $validated['type'] = $request->type;
+        $validated['type'] = Currency::query()->where('currency', $request->currency)->get()->first()->type;
         PHelp::create($validated);
 
         return redirect('/admin/provide-help');
@@ -135,7 +138,8 @@ class PHelpController extends Controller
     {
         $emails = User::all()->pluck('email');
         $pHelp = PHelp::query()->find($id);
-        return view('admin.provide-help.edit', compact('emails', 'pHelp'));
+        $currencies = Currency::all();
+        return view('admin.provide-help.edit', compact('emails', 'pHelp', 'currencies'));
     }
 
     /**
@@ -149,11 +153,12 @@ class PHelpController extends Controller
         $pHelp = PHelp::query()->find($id);
         $validated = $request->validate([
             'email' => ['exists:users,email', 'required'],
-            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/']
+            'amount' => ['required', 'regex:/^[0-9]+(\.[0-9][0-9]?)?$/'],
+            'currency' => ['required'],
         ], [
             'amount.regex' => 'The :attribute should be double',
         ]);
-        $validated['type'] = $request->type;
+        $validated['type'] = Currency::query()->where('currency', $request->currency)->get()->first()->type;
         $pHelp->update($validated);
 
         return redirect('/admin/provide-help');

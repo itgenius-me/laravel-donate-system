@@ -29,6 +29,7 @@ return [
     'Agreement' => 'I agree to the Terms of Use and Privacy Policy.',
     'already_have' => 'Already have an account? Sign In',
     'not_have' => 'Register here!',
+    'currency' => 'Currency',
     'forgot_password' => 'Forgot password?',
     'LoginHere' => 'Login Here',
     'ResetPassword' => 'Reset Password',
@@ -122,7 +123,8 @@ return [
     ],
     'OrderGenerate' => [
         'title'=> 'Order Generate',
-        'Percent'=> '% of Provide Help'
+        'Percent'=> '% of Provide Help',
+        'Remain_Amount'=> 'Remain Amount',
     ],
     'Application' => [
         'title'=> 'Application',
