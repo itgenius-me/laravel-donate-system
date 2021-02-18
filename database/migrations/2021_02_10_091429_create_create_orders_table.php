@@ -20,7 +20,7 @@ class CreateCreateOrdersTable extends Migration
 
             $table->integer('ph_id')->default(0)->comment('id of provide help');
             $table->string('ph_email', 191)->comment('email user of provide help');
-            $table->integer('ph_order_type')->default(0)->comment('0: 10% first, 1: 40% first, 2: 40% second, 3: 10% second');
+            $table->integer('ph_order_type')->default(0)->comment('1: 10% first, 2: 40% first, 3: 40% second, 4: 10% second');
 
             $table->string('currency', 191)->comment('BRL, NGN, TRX, XRP, etc');
             $table->double('match_order_amount')->comment('paid amount to get help');
