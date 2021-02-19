@@ -45,6 +45,9 @@ Route::middleware(['auth', 'verified', 'activated'])->group( function () {
         Route::get('create-order/provide-help', [App\Http\Controllers\Admin\CreateOrderController::class, 'provideHelps']);
         Route::post('create-order/order-generate-multi', [App\Http\Controllers\Admin\CreateOrderController::class, 'generateMulti']);
         Route::post('create-order/order-generate', [App\Http\Controllers\Admin\CreateOrderController::class, 'generate']);
+
+        Route::get('view-orders', [App\Http\Controllers\Admin\ViewOrderController::class, 'index']);
+        Route::delete('view-orders/destroy/{id}', [App\Http\Controllers\Admin\ViewOrderController::class, 'destroy'])->name('view-orders.destroy');
     });
 
     Route::get('test', function () {
