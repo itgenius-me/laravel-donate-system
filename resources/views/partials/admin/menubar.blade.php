@@ -29,7 +29,7 @@
                     </ul>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('/testimonial') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('/admin/testimonial') }}" aria-expanded="false">
                         <i class="mdi mdi-history"></i>
                         <span class="hide-menu">{{ __('global.Testimonial.title') }}</span>
                     </a>
@@ -41,7 +41,7 @@
                     </a>
                     <ul aria-expanded="false" class="collapse">
                         <li>
-                            <a href="{{ url('/view-orders') }}">
+                            <a href="{{ url('/admin/view-orders') }}">
                                 {{ __('global.OrderManage.ViewOrders.title') }}
                             </a>
                         </li>
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li>
-                    <a class="waves-effect waves-dark" href="{{ url('/application') }}" aria-expanded="false">
+                    <a class="waves-effect waves-dark" href="{{ url('/admin/application') }}" aria-expanded="false">
                         <i class="mdi mdi-application"></i>
                         <span class="hide-menu">{{ __('global.Application.title') }}</span>
                     </a>
