@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         DB::table('role_has_permissions')->truncate();
         $this->call(PermissionSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(CurrenciesTableSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }
