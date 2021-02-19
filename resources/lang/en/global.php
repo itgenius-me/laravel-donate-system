@@ -133,6 +133,17 @@ return [
         'ph_manager'=> 'Manager of Provide Help',
         'date_range'=> 'Date Range',
     ],
+    'ViewOrders' => [
+        'title'=> 'View Orders',
+        'generated_date'=> 'Date Generate Match',
+        'time_left'=> 'Time Left to Expire',
+        'sender_email'=> 'Email of Sender (PH)',
+        'receive_email'=> 'Email of Receiver (GH)',
+        'amount'=> 'Amount of match order',
+        'currency'=> 'Local Currency or Cripto',
+        'status'=> 'Status',
+        'attached_proof'=> 'Attached Proof of Payment',
+    ],
     'Application' => [
         'title'=> 'Application',
     ],
