@@ -106,7 +106,7 @@ class PHelpController extends Controller
     public function create()
     {
         $emails = User::all()->pluck('email');
-        $currencies = Currency::all();
+        $currencies = Currency::query()->select('currency')->where("currency", '<>', '')->groupBy('currency')->get();
         return view('admin.provide-help.create', compact('emails', 'currencies'));
     }
 
@@ -138,7 +138,7 @@ class PHelpController extends Controller
     {
         $emails = User::all()->pluck('email');
         $pHelp = PHelp::query()->find($id);
-        $currencies = Currency::all();
+        $currencies = Currency::query()->select('currency')->where("currency", '<>', '')->groupBy('currency')->get();
         return view('admin.provide-help.edit', compact('emails', 'pHelp', 'currencies'));
     }
 

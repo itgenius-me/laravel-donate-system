@@ -37,6 +37,9 @@
                 <div class="col-md-3 mt-2">
                     <h5 class="box-title">{{ trans('global.currency') }}</h5>
                     <select id="currency" name="currency" class="select2 form-control custom-select @error('currency') is-invalid @enderror" style="width: 100%; height:36px;">
+                        <option value="-1">
+                            &nbsp;
+                        </option>
                         @foreach($currencies as $currency)
                             <option value="{{ $currency->currency }}" @if(old('currency')==$currency->currency) selected @endif>
                                 {{ $currency->currency }}
@@ -284,7 +287,7 @@
             }
         ],
         select: {
-            style:    'os',
+            style:    'multi',
             selector: 'td:first-child'
         },
     });
@@ -328,9 +331,12 @@
     });
     var checkSum = function () {
         var get_total = 0;
+        var g_currency = "";
+        var p_currency = "";
         gCnt = 0; pCnt = 0;
         $.each(gTable.rows('.selected').data(), function () {
             get_total += this.remain_amount;
+            g_currency = this.currency;
             ++gCnt;
         });
 
@@ -341,10 +347,11 @@
                 percent = 0.1;
             else percent = 0.4;
             provide_total += this.amount * percent;
+            p_currency = this.currency;
             ++pCnt;
         });
 
-        if (get_total >= provide_total && get_total !== 0 && provide_total !== 0) {
+        if (get_total >= provide_total && get_total !== 0 && provide_total !== 0 && g_currency === p_currency) {
             $("#btnCreate").removeAttr("disabled");
         } else {
             $("#btnCreate").attr("disabled", "disabled");
@@ -437,21 +444,20 @@
     });
 
     $("#btnCreate").click(function () {
-        var gh_ids, ph_ids;
+        var gh_ids = [], ph_ids;
         $.each(gTable.rows('.selected').data(), function () {
-            gh_ids = this;
+            gh_ids.push(this);
         });
 
         $.each(pTable.rows('.selected').data(), function () {
             ph_ids = this;
         });
-
         $.ajax({
             type: 'POST',
             url: "{{ url('admin/create-order/order-generate') }}",
             data: {
                 "_token": "{{ csrf_token() }}",
-                'gh_ids': gh_ids,
+                'gh_ids': JSON.stringify(gh_ids),
                 'ph_ids': ph_ids
             },
             success: function (data) {

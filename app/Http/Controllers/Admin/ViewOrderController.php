@@ -14,7 +14,7 @@ class ViewOrderController extends Controller
 {
     //
     public function index(Request $request) {
-        $currencies = Currency::all();
+        $currencies = Currency::query()->select('currency')->where("currency", '<>', '')->groupBy('currency')->get();
 
         if ($request->ajax()) {
             $currency = strval($request->columns[6]['search']['value']);

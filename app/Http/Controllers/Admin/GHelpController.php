@@ -106,7 +106,7 @@ class GHelpController extends Controller
     public function create()
     {
         $emails = User::all()->pluck('email');
-        $currencies = Currency::all();
+        $currencies = Currency::query()->select('currency')->where("currency", '<>', '')->groupBy('currency')->get();
         return view('admin.get-help.create', compact('emails', 'currencies'));
     }
 
@@ -138,7 +138,7 @@ class GHelpController extends Controller
     {
         $emails = User::all()->pluck('email');
         $gHelp = GHelp::query()->find($id);
-        $currencies = Currency::all();
+        $currencies = Currency::query()->select('currency')->where("currency", '<>', '')->groupBy('currency')->get();
         return view('admin.get-help.edit', compact('emails', 'gHelp', 'currencies'));
     }
 
