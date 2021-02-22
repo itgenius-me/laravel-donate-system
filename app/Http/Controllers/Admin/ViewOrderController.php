@@ -88,7 +88,8 @@ class ViewOrderController extends Controller
                         return '<span class="label label-warning">'. __('global.OrderManage.GetHelp.Unconfirmed') .'</span>';
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = ' <button onclick="deleteOrder('. "'$row->id'" .')" data-id="'.$row->id.'" class="btn btn-danger btn-sm mb-1"><i class="far fa-trash-alt"></i></button>';
+                    $btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" data-whatever="@mdo">Open modal for @mdo</button>';
+                    $btn .= ' <button onclick="deleteOrder('. "'$row->id'" .')" data-id="'.$row->id.'" class="btn btn-danger btn-sm mb-1"><i class="far fa-trash-alt"></i></button>';
                     $btn .= '<form id="deleteForm'. $row->id .'" action="'. route('admin.view-orders.destroy', $row->id) .'" method="POST" style="display: none">
                     <input type="hidden" name="_token" value="'. csrf_token() .'">
                     <input type="hidden" name="_method" value="DELETE">
