@@ -126,7 +126,6 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-
 @endsection
 
 @push('css')
@@ -268,7 +267,6 @@
     function change_expire() {
 
     }
-
     setTimeout(function () {
         $("#currency").trigger('change')
         $("#status").trigger('change')
