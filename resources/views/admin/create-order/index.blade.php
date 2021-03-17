@@ -26,7 +26,7 @@
     <div class="card">
         <div class="card-body">
             <div class="row">
-                <div class="col-md-3 mt-2">
+                <div class="col-md-2 mt-2">
                     <h5 class="box-title" style="margin-bottom: 10px;">{{ trans('global.OrderGenerate.gh_manager') }}</h5>
                     <input type="checkbox" id="ch_gh" class="js-switch" data-color="#009efb" />
                 </div>
@@ -47,7 +47,19 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-md-3 mt-2">
+                <div class="col-md-2 mt-2">
+                    <h5 class="box-title" style="margin-bottom: 10px;">{{ trans('global.OrderGenerate.Percent') }}</h5>
+                    <select id="percent" name="percent" class="select2 form-control custom-select" style="width: 100%; height:36px;">
+                        <option value="-1">
+                            &nbsp;
+                        </option>
+                        <option value="1">{{ trans('global.OrderGenerate.first_10') }}</option>
+                        <option value="2">{{ trans('global.OrderGenerate.first_40') }}</option>
+                        <option value="3">{{ trans('global.OrderGenerate.second_40') }}</option>
+                        <option value="4">{{ trans('global.OrderGenerate.second_10') }}</option>
+                    </select>
+                </div>
+                <div class="col-md-2 mt-2">
                     <h5 class="box-title" style="margin-bottom: 10px;">{{ trans('global.OrderGenerate.ph_manager') }}</h5>
                     <input type="checkbox" class="js-switch" id="ch_ph" data-color="#009efb" />
                 </div>
@@ -245,6 +257,10 @@
         pTable.column(4).search($(this).val()).draw();
     })
 
+    $("#percent").change(function () {
+        pTable.column(7).search($(this).val()).draw();
+    })
+
     var gCnt = 0, pCnt = 0;
     var gTable = $('#gTable').DataTable({
         'processing': true,
@@ -341,20 +357,33 @@
         });
 
         var provide_total = 0;
+        var order_type = 0;
         $.each(pTable.rows('.selected').data(), function () {
             var percent = 0;
             if (this.order_type === 1 || this.order_type === 4)
                 percent = 0.1;
             else percent = 0.4;
-            provide_total += this.amount * percent;
+            if (this.order_type === 4){
+                order_type = this.order_type;
+                provide_total += this.remain_amount;
+            } else {
+                provide_total += this.amount * percent;
+            }
             p_currency = this.currency;
             ++pCnt;
         });
 
-        if (get_total >= provide_total && get_total !== 0 && provide_total !== 0 && g_currency === p_currency) {
-            $("#btnCreate").removeAttr("disabled");
-        } else {
+        if (get_total === 0 || provide_total === 0 || g_currency !== p_currency)
+        {
             $("#btnCreate").attr("disabled", "disabled");
+        } else {
+            if (order_type === 4) {
+                $("#btnCreate").removeAttr("disabled");
+            } else if(get_total >= provide_total && order_type !== 4){
+                $("#btnCreate").removeAttr("disabled");
+            } else {
+                $("#btnCreate").attr("disabled", "disabled");
+            }
         }
     }
     var pTable = $('#pTable').DataTable({
@@ -396,6 +425,10 @@
             {
                 searchable: false,
                 targets:   4
+            },
+            {
+                searchable: false,
+                targets:   7
             }
         ],
         select: {
@@ -469,6 +502,7 @@
     setTimeout(function () {
         $("#daterange").trigger('change')
         $("#currency").trigger('change')
+        $("#percent").trigger('change')
     }, 500);
 </script>
 @endpush

@@ -88,7 +88,7 @@ class ViewOrderController extends Controller
                         return '<span class="label label-warning">'. __('global.OrderManage.GetHelp.Unconfirmed') .'</span>';
                 })
                 ->addColumn('action', function ($row) {
-                    $btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm" data-whatever="@mdo">Open modal for @mdo</button>';
+                    $btn = '<button type="button" class="btn btn-info btn-sm mb-1" title="Change Time Left to Expire" data-expire-date="' . Carbon::parse($row->expired_date)->toDateTimeString() . '" data-id="'.$row->id.'" data-current-date="'.Carbon::parse(date('Y-m-d h:i:s')).'" data-toggle="time_modal" data-whatever="@mdo"><i class="fa fa-clock"></i></button>';
                     $btn .= ' <button onclick="deleteOrder('. "'$row->id'" .')" data-id="'.$row->id.'" class="btn btn-danger btn-sm mb-1"><i class="far fa-trash-alt"></i></button>';
                     $btn .= '<form id="deleteForm'. $row->id .'" action="'. route('admin.view-orders.destroy', $row->id) .'" method="POST" style="display: none">
                     <input type="hidden" name="_token" value="'. csrf_token() .'">

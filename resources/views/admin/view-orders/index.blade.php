@@ -86,19 +86,47 @@
     </div>
 </div>
 <!-- sample modal content -->
-<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="display: none;">
+<div class="modal fade time_modal" tabindex="-1" role="dialog" aria-hidden="true" style="display: none;">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>
+                <h4 class="modal-title">{{ trans('global.ViewOrders.new_expire') }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
-            <div class="modal-body"> content will be here </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="current_date" class="col-form-label text-right">{{ trans('global.ViewOrders.cur_expire') }}</label>
+                            <div class="input-group">
+                                <input id="current_date" class="form-control" disabled>
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="icon-calender"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="time_modal_id" />
+                        <div class="form-group">
+                            <label for="new_date" class="col-form-label text-right">{{ trans('global.ViewOrders.new_expire') }}</label>
+                            <div class="input-group">
+                                <input id="new_date" class="form-control">
+                                <div class="input-group-append">
+                                    <span class="input-group-text"><i class="icon-calender"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 text-right">
+                        <button class="btn btn-primary" onclick="change_expire()">{{ trans('global.ViewOrders.change_expire_date') }}</button>
+                    </div>
+                </div>
+            </div>
         </div>
         <!-- /.modal-content -->
     </div>
     <!-- /.modal-dialog -->
 </div>
+
 @endsection
 
 @push('css')
@@ -107,6 +135,10 @@
 <link href="{{ asset('assets/node_modules/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
 <link href="{{ asset('assets/node_modules/select2/dist/css/select2.min.css') }}" rel="stylesheet" type="text/css" />
 <link href="{{ asset('assets/node_modules/bootstrap-select/bootstrap-select.min.css') }}" rel="stylesheet" type="text/css" />
+<link href="{{ asset('dist/css/pages/stylish-tooltip.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('assets/node_modules/moment/moment.js') }}"></script>
+
+<link href="{{ asset('datetimepicker/css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css" />
 <style>
     .jq-icon-info {
         background-color: #03a9f3;
@@ -131,6 +163,18 @@
     .alert-rounded {
         border-radius: 60px;
     }
+
+    .close:focus {
+        outline: none;
+    }
+    .table-condensed {
+        width: 100%;
+    }
+
+    .datetimepicker {
+        width: 260px;
+    }
+
 </style>
 @endpush
 
@@ -140,7 +184,15 @@
 <script src="{{ asset('assets/node_modules/toast-master/js/jquery.toast.js') }}"></script>
 <script src="{{ asset('assets/node_modules/select2/dist/js/select2.full.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/node_modules/bootstrap-select/bootstrap-select.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('datetimepicker/js/bootstrap-datetimepicker.js') }}" type="text/javascript"></script>
+<script src="{{ asset('datetimepicker/js/locales/bootstrap-datetimepicker.pt-BR.js') }}" type="text/javascript"></script>
+
 <script>
+    $("#new_date").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        todayHighlight: true,
+        language: 'en',
+    });
     $(".select2").select2();
     $("#currency").change(function () {
         dataTable.column(6).search($(this).val()).draw();
@@ -156,6 +208,19 @@
         'ajax': {
             'url': "{{ url('admin/view-orders') }}",
             'type': 'GET'
+        },
+        "drawCallback": function( settings ) {
+            $('[data-toggle="time_modal"]').click(function () {
+                var expire_date = $(this).attr("data-expire-date");
+                var current_date = $(this).attr("data-current-date");
+                var id = $(this).attr("data-id");
+                $("#time_modal_id").val(id)
+                $("#current_date").val(expire_date)
+                $('#new_date').datetimepicker('setStartDate', current_date);
+                $(".time_modal").modal({
+                    'backdrop': 'static',
+                });
+            })
         },
         columnDefs: [
             {
@@ -198,6 +263,10 @@
                 $('#deleteForm'+id).submit();
             }
         })
+    }
+
+    function change_expire() {
+
     }
 
     setTimeout(function () {
