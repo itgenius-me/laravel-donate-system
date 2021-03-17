@@ -143,6 +143,9 @@ return [
         'currency'=> 'Local Currency or Cripto',
         'status'=> 'Status',
         'attached_proof'=> 'Attached Proof of Payment',
+        'cur_expire'=> 'Current Expire Date',
+        'new_expire'=> 'New Expire Date',
+        'change_expire_date'=> 'Change Expire Date',
     ],
     'Application' => [
         'title'=> 'Application',
